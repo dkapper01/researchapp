@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{titan.name}
+  p= titan.lifespan
+  
+  if titan_companys.length
+  
+    p #[strong Delete the following companys before attempting to delete this titan.]
+  
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Compnays
+    
+      dl
+      each company in titan_companys
+        dt 
+          a(href=company.url) #{company.title}
+        dd #{company.leadership_page_url}
+
+  else
+    p Do you really want to delete this Titan?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#titanid.form-control(type='hidden',name='titanid', required='true', value=titan._id )
+
+      button.btn.btn-primary(type='submit') Delete

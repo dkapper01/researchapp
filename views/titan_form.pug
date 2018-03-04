@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  //h1=title
+
+  form(class='form-style')(method='POST' action='')
+    div.form-group
+      label(for='titan_name') Titan Name:
+      input#titan_name.form-control(type='text', placeholder='' name='titan_name' required='true' value=(undefined===titan ? '' : titan.titan_name) )
+    div.form-group
+      label(for='start_date') Start Date:
+      input#start_date.form-control(type='date', name='start_date' value=(undefined === titan ? '' : titan.start_date_yyyy_mm_dd) required='true' )
+    div.form-group
+      label(for='bloomberg_url') Bloomberg URL:
+      input#bloomberg_url.form-control(type='text', placeholder='' name='bloomberg_url' value=(undefined===titan ? '' : titan.bloomberg_url))
+    div.form-group
+      label(for='linkedin_url') Linkedin URL:
+      input#linkedin_url.form-control(type='text', placeholder='' name='linkedin_url' value=(undefined === titan ? '' : titan.linkedin_url))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

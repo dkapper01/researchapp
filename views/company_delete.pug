@@ -1,0 +1,50 @@
+extends layout
+
+block content
+
+  h1 #{company.company_name}
+    h4
+      u Portfolio Company Information
+  
+  p #[strong Titan:]
+    a(href=company.titan.url) #{company.titan.name}
+  p #[strong Investment date:] #{company.investment_date}
+  p #[strong Bloomberg URL:] #{company.leadership_page_url}
+  p #[strong Titanhouse URL:] #{company.titanhouse_url}
+  p #[strong Firm:]
+    each val in company.firm
+      a(href=val.url) #{val.name}
+      |, 
+
+  hr
+  
+  if company_instances.length
+  
+    p #[strong Delete the following copies before attempting to delete this Compnay.]
+  
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Copies
+    
+        each company_copy in company_instances
+          hr
+          if company_copy.status=='Available'
+            p.text-success #{company_copy.status}
+          else if company_copy.status=='Maintenance'
+            p.text-danger #{company_copy.status}
+          else
+            p.text-warning #{company_copy.status}
+          p #[strong Imprint:] #{company_copy.imprint}
+          if company_copy.status!='Available'
+            p #[strong Due back:] #{company_copy.due_back}
+          p #[strong Id:] 
+            a(href=company_copy.url) #{company_copy._id}
+
+  else
+    p Do you really want to delete this Compnay?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#id.form-control(type='hidden',name='id', required='true', value=company._id )
+
+      button.btn.btn-primary(type='submit') Delete

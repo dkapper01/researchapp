@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css')
+    //link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+html
+  body(data-spy='scroll', data-target='.scrollspy')
+    //nav.navbar.navbar-inverse.navbar-fixed-top
+    nav.navbar.navbar-dark.bg-primary.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/data')
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right.bg-primary
+            li
+              //a(class='active')(href='/data') Dashboard
+            //li
+            //    a(href='#') Settings
+            li
+              //a(href='#') Profile
+            //li
+            //    a(href='#') Help
+          form.navbar-form.navbar-right
+            input.form-control(type='text', placeholder='Search...')
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          ul.nav.nav-sidebar
+            li(class=title=='Firm List'?'active':undefined)
+              a(href='/data/firms/')
+                | All Firms
+                span.sr-only (current)
+            li(class=title=='Compnay List'?'active':undefined)
+              a(href='/data/companys/') All Companies
+            li(class=title=='Titan List'?'active':undefined)
+              a(href='/data/titans') All Titans
+            li(class=title == 'List of Company Instances' ? 'active' : undefined)
+                a(href='/data/companyinstances') All Company Instances
+
+                //a(href='#') Export
+          ul.nav.nav-sidebar
+            li(class=title=='Create Firm'?'active':undefined)
+              a(href='/data/firm/create') Add Firm
+            li(class=title=='Create Company'?'active':undefined)
+              a(href='/data/company/create/') Add Company to Firm
+            li(class=title=='Create Titan'?'active':undefined)
+              a(href='/data/titan/create') Add Titan to Company
+            li(class=title == 'Add New CompanyI' ? 'active' : undefined)
+              a(href='/data/companyinstance/create') Add Company Instance
+
+
+    div(class='col-md-9 pushing-over')
+
+      block content
+
+
+// script(src="js/jquery.min.js")
+// script(src="js/bootstrap.min.js")

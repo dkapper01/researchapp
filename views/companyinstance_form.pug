@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='company') Compnay:
+      select#company.form-control(type='select', placeholder='Select company' name='company' required='true' )
+        for company in company_list
+          option(value=company._id, selected=(selected_company==company._id.toString() ? 'selected' : false) ) #{company.title}
+        
+    div.form-group
+      label(for='imprint') Imprint:
+      input#imprint.form-control(type='text', placeholder='Publisher and date information' name='imprint' required='true' value=(undefined===companyinstance ? '' : companyinstance.imprint) )
+    div.form-group
+      label(for='due_back') Date when company available:
+      input#due_back.form-control(type='date', name='due_back' value=(undefined===companyinstance ? '' : companyinstance.due_back_yyyy_mm_dd))
+            
+    div.form-group
+      label(for='status') Status:
+      select#status.form-control(type='select', placeholder='Select status' name='status' required='true' )
+        option(value='Maintenance' selected=(undefined===companyinstance || companyinstance.status!='Maintenance' ? false:'selected')) Maintenance
+        option(value='Available' selected=(undefined===companyinstance || companyinstance.status!='Available' ? false:'selected')) Available
+        option(value='Loaned' selected=(undefined===companyinstance || companyinstance.status!='Loaned' ? false:'selected')) Loaned
+        option(value='Reserved' selected=(undefined===companyinstance || companyinstance.status!='Reserved' ? false:'selected')) Reserved
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

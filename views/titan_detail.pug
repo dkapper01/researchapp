@@ -1,0 +1,34 @@
+extends layout
+
+block content
+
+  h1 #{titan.titan_name}
+  h4
+    u Titan Information
+  p #[strong Firm:]
+  p #[strong Company:] #{titan.company}
+  p #[strong Start Date:] #{titan.start_date_yyyy_mm_dd}
+  - var bb_url = titan.bloomberg_url
+  p #[strong Bloomberg URL:]
+    a(href=bb_url, target='_blank')  #{titan.bloomberg_url}
+  - var li_url = titan.bloomberg_url
+  p #[strong Linkedin URL:]
+    a(href=li_url, target='_blank')  #{titan.linkedin_url}
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Compnays
+    
+    dl
+    each company in titan_companys
+      dt 
+        a(href=company.url) #{company.title}
+      dd #{company.leadership_page_url}
+
+    else
+      p This titan has no companys.
+      
+  hr
+  p
+    a(class='btn btn-warning btn-spacing')(href=titan.url + '/update') Update Titan
+  
+    a(class='btn btn-danger btn-spacing')(href=titan.url + '/delete') Delete Titan

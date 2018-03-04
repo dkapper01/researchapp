@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  //h5=title
+  .table-responsive
+    table.table.table-striped.table-hover.table-bordered.table-margin
+      thead
+        //tr
+        th #
+        th Firms
+        th Companies
+      tbody
+        - var count = 0
+        each firm in list_firms
+          tr
+            td(class='count_width') #{++count}
+            td(class='main_width')
+              a(href=firm.url) #{firm.firm_name}
+            td
+
