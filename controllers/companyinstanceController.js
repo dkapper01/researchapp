@@ -36,20 +36,20 @@ exports.companyinstance_detail = function(req, res, next) {
 
 };
 
-// Display CompnayInstance create form on GET.
-exports.companyinstance_create_get = function(req, res, next) {
+// Display CompnayInstance add form on GET.
+exports.companyinstance_add_get = function(req, res, next) {
 
      Compnay.find({},'title')
     .exec(function (err, companys) {
       if (err) { return next(err); }
       // Successful, so render.
-      res.render('companyinstance_form', {title: 'Create CompnayInstance', company_list:companys } );
+      res.render('companyinstance_form', {title: 'Add CompnayInstance', company_list:companys } );
     });
 
 };
 
-// Handle CompnayInstance create on POST.
-exports.companyinstance_create_post = [
+// Handle CompnayInstance add on POST.
+exports.companyinstance_add_post = [
 
     // Validate fields.
     body('company', 'Compnay must be specified').isLength({ min: 1 }).trim(),
@@ -68,7 +68,7 @@ exports.companyinstance_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a CompnayInstance object with escaped and trimmed data.
+        // Add a CompnayInstance object with escaped and trimmed data.
         var companyinstance = new CompnayInstance(
           { company: req.body.company,
             imprint: req.body.imprint,
@@ -82,7 +82,7 @@ exports.companyinstance_create_post = [
                 .exec(function (err, companys) {
                     if (err) { return next(err); }
                     // Successful, so render.
-                    res.render('companyinstance_form', { title: 'Create CompnayInstance', company_list : companys, selected_company : companyinstance.company._id , errors: errors.array(), companyinstance:companyinstance });
+                    res.render('companyinstance_form', { title: 'Add CompnayInstance', company_list : companys, selected_company : companyinstance.company._id , errors: errors.array(), companyinstance:companyinstance });
             });
             return;
         }
@@ -172,7 +172,7 @@ exports.companyinstance_update_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a CompnayInstance object with escaped/trimmed data and current id.
+        // Add a CompnayInstance object with escaped/trimmed data and current id.
         var companyinstance = new CompnayInstance(
           { company: req.body.company,
             imprint: req.body.imprint,

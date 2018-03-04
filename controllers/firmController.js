@@ -46,13 +46,13 @@ exports.firm_detail = function(req, res, next) {
 
 };
 
-// Display Firm create form on GET.
-exports.firm_create_get = function(req, res, next) {
-    res.render('firm_form', { title: 'Create Firm'});
+// Display Firm add form on GET.
+exports.firm_add_get = function(req, res, next) {
+    res.render('firm_form', { title: 'Add Firm'});
 };
 
-// Handle Firm create on POST.
-exports.firm_create_post = [
+// Handle Firm add on POST.
+exports.firm_add_post = [
 
     // Validate that the name field is not empty.
     body('firm_name', 'Firm name required').isLength({ min: 1 }).trim(),
@@ -66,7 +66,7 @@ exports.firm_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a firm object with escaped and trimmed data.
+        // Add a firm object with escaped and trimmed data.
         var firm = new Firm(
           { firm_name: req.body.firm_name }
         );
@@ -74,7 +74,7 @@ exports.firm_create_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('firm_form', { title: 'Create Firm', firm: firm, errors: errors.array()});
+            res.render('firm_form', { title: 'Add Firm', firm: firm, errors: errors.array()});
         return;
         }
         else {
@@ -186,7 +186,7 @@ exports.firm_update_post = [
         // Extract the validation errors from a request .
         const errors = validationResult(req);
 
-    // Create a firm object with escaped and trimmed data (and the old id!)
+    // Add a firm object with escaped and trimmed data (and the old id!)
         var firm = new Firm(
           {
           firm_name: req.body.firm_name,

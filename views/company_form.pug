@@ -15,25 +15,26 @@ block content
       input#leadership_page_url.form-control(type='text', placeholder='' name='leadership_page_url' value=(undefined === company ? '' : company.leadership_page_url))
     div.form-group
       label(for='titanhouse_url') Titanhouse URL:
-      input#titanhouse_url.form-control(type='text', placeholder='' name='titanhouse_url' value=(undefined === company ? '' : company.titanhouse_url) required='true')
+      input#titanhouse_url.form-control(type='text', placeholder='' name='titanhouse_url' value=(undefined === company ? '' : company.titanhouse_url) )
     div.form-group
         label(for='titanhouse_url') Firm Name:
         input#titanhouse_url.form-control(type='text', placeholder='Enter the name of the firm the ' name='titanhouse_url' value=(undefined === company ? '' : company.titanhouse_url) required='true')
-    div.form-group
-      label(for='titan') Titan:
-      select#titan.form-control(type='select', placeholder='' name='titan' required='true' )
-        for firm in firms
-          if company
-            option(value=firm._id selected=(firm._id.toString()==company.firm._id.toString() ? 'selected' : false) ) #{firm.firm_name}
-          else
-            option(value=firm._id) #{firm.firm_name}
-    div.form-group
-      label Firm:
-      div
-        for firm in firms
-          div(style='display: inline; padding-right:10px;')
-            input.checkbox-input(type='checkbox', name='firm', id=firm._id, value=firm._id, checked=firm.checked )
-            label(for=firm._id) #{firm.firm_name}
+    //div.form-group
+    //  label(for='titan') Titan:
+    //select#titan.form-control(type='select', placeholder='' name='titan' )
+    //  for firm in firms
+    //    if company
+    //      option(value=firm._id selected=(firm._id.toString()==company.firm._id.toString() ? 'selected' : false) ) #{firm.firm_name}
+    //  else
+    //    option(value=firm._id) #{firm.firm_name}
+
+    //div.form-group
+    //  label Firm:
+    //  div
+    //    for firm in firms
+    //      div(style='display: inline; padding-right:10px;')
+    //        input.checkbox-input(type='checkbox', name='firm', id=firm._id, value=firm._id, checked=firm.checked )
+    //        label(for=firm._id) #{firm.firm_name}
     button.btn.btn-primary(type='submit') Submit
 
   if errors 

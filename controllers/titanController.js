@@ -43,13 +43,13 @@ exports.titan_detail = function (req, res, next) {
 
 };
 
-// Display Titan create form on GET.
-exports.titan_create_get = function (req, res, next) {
-    res.render('titan_form', { title: 'Create Titan' });
+// Display Titan add form on GET.
+exports.titan_add_get = function (req, res, next) {
+    res.render('titan_form', { title: 'Add Titan' });
 };
 
-// Handle Titan create on POST.
-exports.titan_create_post = [
+// Handle Titan add on POST.
+exports.titan_add_post = [
 
     // Validate fields.
     body('titan_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.'),
@@ -71,13 +71,13 @@ exports.titan_create_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/errors messages.
-            res.render('titan_form', { title: 'Create Titan', titan: req.body, errors: errors.array() });
+            res.render('titan_form', { title: 'Add Titan', titan: req.body, errors: errors.array() });
             return;
         }
         else {
             // Data from form is valid.
 
-            // Create an Titan object with escaped and trimmed data.
+            // Add an Titan object with escaped and trimmed data.
             var titan = new Titan(
                 {
                     titan_name: req.body.titan_name,
@@ -185,7 +185,7 @@ exports.titan_update_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create Titan object with escaped and trimmed data (and the old id!)
+        // Add Titan object with escaped and trimmed data (and the old id!)
         var titan = new Titan(
             {
                 titan_name: req.body.titan_name,

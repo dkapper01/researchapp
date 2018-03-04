@@ -11,7 +11,7 @@ var data = require('./routes/data'); // Import routes for "data" area of site
 var compression = require('compression');
 var helmet = require('helmet');
 
-// Create the Express application object
+// Add the Express application object
 var app = express();
 
 app.use(helmet());

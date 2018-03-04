@@ -74,8 +74,8 @@ exports.company_detail = function(req, res, next) {
 
 };
 
-// Display company create form on GET.
-exports.company_create_get = function(req, res, next) {
+// Display company add form on GET.
+exports.company_add_get = function(req, res, next) {
 
     // Get all titans and firms, which we can use for adding to our company.
     async.parallel({
@@ -87,13 +87,13 @@ exports.company_create_get = function(req, res, next) {
         },
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render('company_form', { title: 'Create Company',titans:results.titans, firms:results.firms });
+        res.render('company_form', { title: 'Add Company',titans:results.titans, firms:results.firms });
     });
 
 };
 
-// Handle company create on POST.
-exports.company_create_post = [
+// Handle company add on POST.
+exports.company_add_post = [
     // Convert the firm to an array.
     (req, res, next) => {
         if(!(req.body.firm instanceof Array)){
@@ -107,7 +107,7 @@ exports.company_create_post = [
 
     // Validate fields.
     body('company_name', 'Title must not be empty.').isLength({ min: 1 }).trim(),
-    body('titan', 'Titan must not be empty.').isLength({ min: 1 }).trim(),
+    // body('titan', 'Titan must not be empty.').isLength({ min: 1 }).trim(),
     body('leadership_page_url', 'Bloomberg URL must not be empty.').isLength({ min: 1 }).trim(),
 
     // Sanitize fields.
@@ -120,11 +120,11 @@ exports.company_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a Company object with escaped and trimmed data.
+        // Add a Company object with escaped and trimmed data.
         var company = new Company(
           { company_name: req.body.company_name,
             investment_date: req.body.investment_date,
-            titan: req.body.titan,
+            // titan: req.body.titan,
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
             firm: req.body.firm
@@ -145,12 +145,12 @@ exports.company_create_post = [
                 if (err) { return next(err); }
 
                 // Mark our selected firms as checked.
-                for (let i = 0; i < results.firms.length; i++) {
-                    if (company.firm.indexOf(results.firms[i]._id) > -1) {
-                        results.firms[i].checked='true';
-                    }
-                }
-                res.render('company_form', { title: 'Create Company',titans:results.titans, firms:results.firms, company: company, errors: errors.array() });
+                // for (let i = 0; i < results.firms.length; i++) {
+                //     if (company.firm.indexOf(results.firms[i]._id) > -1) {
+                //         results.firms[i].checked='true';
+                //     }
+                // },titans:results.titans
+                res.render('company_form', { title: 'Add Company', firms:results.firms, company: company, errors: errors.array() });
             });
             return;
         }
@@ -273,7 +273,7 @@ exports.company_update_post = [
 
     // Validate fields.
     body('company_name', 'Title must not be empty.').isLength({ min: 1 }).trim(),
-    body('titan', 'Titan must not be empty.').isLength({ min: 1 }).trim(),
+    // body('titan', 'Titan must not be empty.').isLength({ min: 1 }).trim(),
     body('leadership_page_url', 'Bloomberg URL must not be empty.').isLength({ min: 1 }).trim(),
 
     // Sanitize fields.
@@ -288,11 +288,11 @@ exports.company_update_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a Company object with escaped/trimmed data and old id.
+        // Add a Company object with escaped/trimmed data and old id.
         var company = new Company(
           { company_name: req.body.company_name,
             investment_date: req.body.investment_date,
-            titan: req.body.titan,
+            // titan: req.body.titan,
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
             firm: (typeof req.body.firm==='undefined') ? [] : req.body.firm,

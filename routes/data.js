@@ -15,10 +15,10 @@ var company_instance_controller = require('../controllers/companyinstanceControl
 router.get('/', company_controller.index);
 
 // GET request for creating a Compnay. NOTE This must come before routes that display Compnay (uses id).
-router.get('/company/create', company_controller.company_create_get);
+router.get('/company/add', company_controller.company_add_get);
 
 // POST request for creating Compnay.
-router.post('/company/create', company_controller.company_create_post);
+router.post('/company/add', company_controller.company_add_post);
 
 // GET request to delete Compnay.
 router.get('/company/:id/delete', company_controller.company_delete_get);
@@ -41,10 +41,10 @@ router.get('/companys', company_controller.company_list);
 /// TITAN ROUTES ///
 
 // GET request for creating Titan. NOTE This must come before route for id (i.e. display titan).
-router.get('/titan/create', titan_controller.titan_create_get);
+router.get('/titan/add', titan_controller.titan_add_get);
 
 // POST request for creating Titan.
-router.post('/titan/create', titan_controller.titan_create_post);
+router.post('/titan/add', titan_controller.titan_add_post);
 
 // GET request to delete Titan.
 router.get('/titan/:id/delete', titan_controller.titan_delete_get);
@@ -68,10 +68,10 @@ router.get('/titans', titan_controller.titan_list);
 /// FIRM ROUTES ///
 
 // GET request for creating a Firm. NOTE This must come before route that displays Firm (uses id).
-router.get('/firm/create', firm_controller.firm_create_get);
+router.get('/firm/add', firm_controller.firm_add_get);
 
 // POST request for creating Firm.
-router.post('/firm/create', firm_controller.firm_create_post);
+router.post('/firm/add', firm_controller.firm_add_post);
 
 // GET request to delete Firm.
 router.get('/firm/:id/delete', firm_controller.firm_delete_get);
@@ -95,10 +95,10 @@ router.get('/firms', firm_controller.firm_list);
 /// COMPANYINSTANCE ROUTES ///
 
 // GET request for creating a CompnayInstance. NOTE This must come before route that displays CompnayInstance (uses id).
-router.get('/companyinstance/create', company_instance_controller.companyinstance_create_get);
+router.get('/companyinstance/add', company_instance_controller.companyinstance_add_get);
 
 // POST request for creating CompnayInstance.
-router.post('/companyinstance/create', company_instance_controller.companyinstance_create_post);
+router.post('/companyinstance/add', company_instance_controller.companyinstance_add_post);
 
 // GET request to delete CompnayInstance.
 router.get('/companyinstance/:id/delete', company_instance_controller.companyinstance_delete_get);
