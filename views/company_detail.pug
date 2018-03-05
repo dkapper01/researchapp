@@ -1,22 +1,35 @@
 extends layout
 
 block content
-  h1 #{company.company_name}
-  h4
-    u Portfolio Company Information
+    h1 #{company.company_name}
+    h4
+        u Firm Information
 
-  p #[strong Investment date:] #{company.investment_date}
-  - var leadership_url = company.leadership_page_url
-  p #[strong Leadership Page URL:]
-    a(href=leadership_url, target='_blank')  #{company.leadership_page_url}
-  - var th_url = company.titanhouse_url
-  p #[strong Titanhouse URL:]
-    a(href=th_url, target='_blank')  #{company.titanhouse_url}
-
-
-
+    .table-responsive
+        table.table.table-striped.table-hover.table-bordered.table-margin
+            thead
+                tr
+                    th #
+                    th Portfolio Company
+                    th
+            tbody
+                - var count = 0
+                each val in titan_companys
+                    tr
+                        td(class='count_width') #{++count}
+                        td(class='main_width')
+                            a(href=val.url) #{val.company_name}
+                        td
+                else
+                    p This genre has no books.
     hr
     p
-      a(class='btn btn-warning btn-spacing')(href=company.url + '/update') Update Company
+        a(class='btn btn-warning btn-spacing')(href=firm.url+'/update') Update firm
 
-      a(class='btn btn-danger btn-spacing')(href=company.url + '/delete') Delete Companyd
+        a(class='btn btn-danger')(href=firm.url+'/delete') Delete Firm
+
+
+
+
+
+

@@ -9,7 +9,7 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.titan_list = function (req, res, next) {
 
     Titan.find()
-        .sort([['bloomberg_url', 'descending']])
+        .sort([['titan_name', 'descending']])
         .exec(function (err, list_titans) {
             if (err) { return next(err); }
             // Successful, so render.
@@ -26,8 +26,8 @@ exports.titan_detail = function (req, res, next) {
             Titan.findById(req.params.id)
                 .exec(callback)
         },
-        titans_companys: function (callback) {
-            Company.find({ 'titan': req.params.id }, 'title leadership_page_url')
+        titan_companys: function (callback) {
+            Company.find({ 'company': req.params.id })
                 .exec(callback)
         },
     }, function (err, results) {
@@ -38,7 +38,7 @@ exports.titan_detail = function (req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('titan_detail', { title: 'Titan Detail', titan: results.titan, titan_companys: results.titans_companys });
+        res.render('titan_detail', { title: 'Titan Detail', titan: results.titan, titan_companys: results.titan_companys });
     });
 
 };
@@ -47,11 +47,10 @@ exports.titan_detail = function (req, res, next) {
 exports.titan_add_get = function (req, res, next) {
     // res.render('titan_form', { title: 'Add Titan' });
 
-    Company.find({},'company_name')
+    Company.find({}, 'company_name')
         .exec(function (err, companys) {
-            if (err) { return next(err); }
-            // Successful, so render.
-            res.render('titan_form', {title: 'Add Titan', company_list:companys } );
+            if(err) { return next(err); }
+            res.render('titan_form', {title: 'Add Titan', company_list:companys });
         });
 };
 
@@ -61,7 +60,7 @@ exports.titan_add_post = [
 
     // Sanitize (trim and escape) the name field.
     sanitizeBody('titan_name').trim().escape(),
-    // sanitizeBody('start_date').toDate(),
+    sanitizeBody('start_date').toDate(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -70,15 +69,12 @@ exports.titan_add_post = [
     // Add a titan object with escaped and trimmed data.
     var titan = new Titan(
         {
-            company: req.body.company,
+            company: req.body.firm,
             titan_name: req.body.titan_name,
             start_date: req.body.start_date,
             bloomberg_url: req.body.bloomberg_url,
             linkedin_url: req.body.linkedin_url,
-            titan: req.body.titan
-        }
-
-    );
+        });
 
 
 // Data from form is valid.
@@ -194,7 +190,6 @@ exports.titan_update_post = [
 // Create Titan object with escaped and trimmed data (and the old id!)
 var titan = new Titan(
     {
-        company: req.body.company,
         titan_name: req.body.titan_name,
         start_date: req.body.start_date,
         bloomberg_url: req.body.bloomberg_url,

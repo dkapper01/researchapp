@@ -5,10 +5,10 @@ var Schema = mongoose.Schema;
 
 var TitanSchema = new Schema(
     {
-        titan_name: {type: String, required: true, max: 100},
-        start_date: { type: Date },
-        bloomberg_url: {type: String},
-        linkedin_url: {type: String},
+    titan_name: {type: String, required: true, max: 100},
+    start_date: { type: Date },
+    bloomberg_url: {type: String},
+    linkedin_url: {type: String},
     }
   );
 

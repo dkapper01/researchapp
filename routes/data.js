@@ -90,5 +90,4 @@ router.get('/firm/:id', firm_controller.firm_detail);
 // GET request for list of all Firm.
 router.get('/firms', firm_controller.firm_list);
 
-
 module.exports = router;
