@@ -5,8 +5,7 @@ block content
   h4
     u Portfolio Company Information
 
-  p #[strong Firm:] #{company.firm}
-  p #[strong Investment date:] #{company.investment_date_yyyy_mm_dd}
+  p #[strong Investment date:] #{company.investment_date}
   - var leadership_url = company.leadership_page_url
   p #[strong Leadership Page URL:]
     a(href=leadership_url, target='_blank')  #{company.leadership_page_url}
@@ -14,33 +13,8 @@ block content
   p #[strong Titanhouse URL:]
     a(href=th_url, target='_blank')  #{company.titanhouse_url}
 
-  //p #[strong Titan:]
-  //    a(href=company.titan)  #{company.titan.titan_name}
-  //p #[strong Firm:]
-  //  each val in company.firm
-  //    a(href=val.url) #{val.firm_name}
-  //    |,
 
-  div(style='margin-left:20px;margin-top:20px')
-    h4 Copies
-    
-    each val in company_instances
-      hr
-      if val.status=='Available'
-        p.text-success #{val.status}
-      else if val.status=='Maintenance'
-        p.text-danger #{val.status}
-      else
-        p.text-warning #{val.status} 
-      p #[strong Imprint:] #{val.imprint}
-      if val.status!='Available'
-        p #[strong Due back:] #{val.due_back}
-      p #[strong Id:] 
-        a(href=val.url) #{val._id}
- 
-    else
-      p There are no copies of this company in the data.
-      
+
     hr
     p
       a(class='btn btn-warning btn-spacing')(href=company.url + '/update') Update Company

@@ -9,7 +9,7 @@ block content
       input#titan_name.form-control(type='text', placeholder='' name='titan_name' required='true' value=(undefined===titan ? '' : titan.titan_name) )
     div.form-group
       label(for='start_date') Start Date:
-      input#start_date.form-control(type='date', name='start_date' value=(undefined === titan ? '' : titan.start_date_yyyy_mm_dd) required='true' )
+      input#start_date.form-control(type='date', name='start_date' value=(undefined === titan ? '' : titan.start_date_yyyy_mm_dd) )
     div.form-group
       label(for='bloomberg_url') Bloomberg URL:
       input#bloomberg_url.form-control(type='text', placeholder='' name='bloomberg_url' value=(undefined===titan ? '' : titan.bloomberg_url))

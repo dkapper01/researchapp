@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var FirmSchema = new Schema({
-    firm_name: {type: String, required: true, min: 3, max: 100}
+    firm_name: {type: String, required: true, min: 3, max: 100},
+    company: [{ type: Schema.ObjectId, ref: 'Company', required: true }]
 });
 
 // Virtual for this firm instance URL.

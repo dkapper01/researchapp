@@ -2,11 +2,10 @@ var Company = require('../models/company');
 var Titan = require('../models/titan');
 var Firm = require('../models/firm');
 var CompanyInstance = require('../models/companyinstance');
+var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
-// const { sanitizeBody } = require('express-validator/filter');
-
-var async = require('async');
+const { sanitizeBody } = require('express-validator/filter');
 
 exports.index = function(req, res) {
 
@@ -35,13 +34,13 @@ exports.index = function(req, res) {
 // Display list of all companys.
 exports.company_list = function(req, res, next) {
 
-  Company.find({}, 'company_name titan ')
-    .populate('titan')
-    .exec(function (err, list_companys) {
-      if (err) { return next(err); }
-      // Successful, so render
-      res.render('company_list', { title: 'Company List', company_list:  list_companys});
-    });
+    Company.find()
+        .sort([['company_name', 'descending']])
+        .exec(function (err, list_companys) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('company_list', { title: 'Company List', list_companys:  list_companys});
+        });
 
 };
 
@@ -52,15 +51,13 @@ exports.company_detail = function(req, res, next) {
         company: function(callback) {
 
             Company.findById(req.params.id)
-              .populate('titan')
-              .populate('firm')
               .exec(callback);
         },
-        company_instance: function(callback) {
-
-          CompanyInstance.find({ 'company': req.params.id })
-          .exec(callback);
+        firm_company: function(callback) {
+            Firm.find({ 'firm': req.params.id })
+                .exec(callback);
         },
+
     }, function(err, results) {
         if (err) { return next(err); }
         if (results.company==null) { // No results.
@@ -69,103 +66,70 @@ exports.company_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('company_detail', { title: 'Title', company:  results.company, company_instances: results.company_instance } );
+        res.render('company_detail', { title: 'Company Detail', company:  results.company, firm_company: results.firm_company } );
     });
 
 };
 
 // Display company add form on GET.
 exports.company_add_get = function(req, res, next) {
+        // res.render('company_form', { title: 'Add Company' });
 
-    // Get all titans and firms, which we can use for adding to our company.
-    async.parallel({
-        titans: function(callback) {
-            Titan.find(callback);
-        },
-        firms: function(callback) {
-            Firm.find(callback);
-        },
-    }, function(err, results) {
-        if (err) { return next(err); }
-        res.render('company_form', { title: 'Add Company',titans:results.titans, firms:results.firms });
-    });
-
+    Firm.find({},'firm_name')
+        .exec(function (err, firms) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('company_form', {title: 'Add Company', firm_list:firms } );
+        });
 };
 
 // Handle company add on POST.
 exports.company_add_post = [
-    // Convert the firm to an array.
-    (req, res, next) => {
-        if(!(req.body.firm instanceof Array)){
-            if(typeof req.body.firm==='undefined')
-            req.body.firm=[];
-            else
-            req.body.firm=new Array(req.body.firm);
-        }
-        next();
-    },
 
-    // Validate fields.
-    body('company_name', 'Title must not be empty.').isLength({ min: 1 }).trim(),
-    // body('titan', 'Titan must not be empty.').isLength({ min: 1 }).trim(),
-    body('leadership_page_url', 'Bloomberg URL must not be empty.').isLength({ min: 1 }).trim(),
+    // Sanitize (trim and escape) the name field.
+    sanitizeBody('company_name').trim().escape(),
 
-    // Sanitize fields.
-    // sanitizeBody('*').trim().escape(),
-    // sanitizeBody('firm.*').trim().escape(),
     // Process request after validation and sanitization.
     (req, res, next) => {
 
 
-        // Extract the validation errors from a request.
-        const errors = validationResult(req);
-
-        // Add a Company object with escaped and trimmed data.
-        var company = new Company(
-          { company_name: req.body.company_name,
+    var company = new Company(
+        {
+            firm: req.body.firm,
+            company_name: req.body.company_name,
             investment_date: req.body.investment_date,
-            // titan: req.body.titan,
             leadership_page_url: req.body.leadership_page_url,
-            titanhouse_url: req.body.titanhouse_url,
-            firm: req.body.firm
-           });
+            titanhouse_url: req.body.titanhouse_url
 
-        if (!errors.isEmpty()) {
-            // There are errors. Render form again with sanitized values/error messages.
+        });
 
-            // Get all titans and firms for form.
-            async.parallel({
-                titans: function(callback) {
-                    Titan.find(callback);
-                },
-                firms: function(callback) {
-                    Firm.find(callback);
-                },
-            }, function(err, results) {
-                if (err) { return next(err); }
 
-                // Mark our selected firms as checked.
-                // for (let i = 0; i < results.firms.length; i++) {
-                //     if (company.firm.indexOf(results.firms[i]._id) > -1) {
-                //         results.firms[i].checked='true';
-                //     }
-                // },titans:results.titans
-                res.render('company_form', { title: 'Add Company', firms:results.firms, company: company, errors: errors.array() });
-            });
-            return;
+// Data from form is valid.
+// Check if Firm with same name already exists.
+Company.findOne({'company_name': req.body.company_name})
+    .exec(function (err, found_company) {
+        if (err) {
+            return next(err);
+        }
+
+        if (found_company) {
+            // Firm exists, redirect to its detail page.
+            res.redirect(found_company.url);
         }
         else {
-            // Data from form is valid. Save company.
             company.save(function (err) {
-                if (err) { return next(err); }
-                   // Successful - redirect to new company record.
-                   res.redirect(company.url);
-                });
+                if (err) {
+                    return next(err);
+                }
+                // Firm saved. Redirect to company detail page.
+                res.redirect(company.url);
+            });
+
         }
-    }
+
+    });
+}
 ];
-
-
 
 // Display company delete form on GET.
 exports.company_delete_get = function(req, res, next) {
@@ -224,113 +188,38 @@ exports.company_delete_post = function(req, res, next) {
 // Display company update form on GET.
 exports.company_update_get = function(req, res, next) {
 
-    // Get company, titans and firms for form.
-    async.parallel({
-        company: function(callback) {
-            Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
-        },
-        titans: function(callback) {
-            Titan.find(callback);
-        },
-        firms: function(callback) {
-            Firm.find(callback);
-        },
-        }, function(err, results) {
-            if (err) { return next(err); }
-            if (results.company==null) { // No results.
-                var err = new Error('Company not found');
-                err.status = 404;
-                return next(err);
-            }
-            // Success.
-            // Mark our selected firms as checked.
-            for (var all_g_iter = 0; all_g_iter < results.firms.length; all_g_iter++) {
-                for (var company_g_iter = 0; company_g_iter < results.company.firm.length; company_g_iter++) {
-                    if (results.firms[all_g_iter]._id.toString()==results.company.firm[company_g_iter]._id.toString()) {
-                        results.firms[all_g_iter].checked='true';
-                    }
-                }
-            }
-            res.render('company_form', { title: 'Update Company', titans:results.titans, firms:results.firms, company: results.company });
-        });
+    Company.findById(req.params.id, function(err, company) {
+        if (err) { return next(err); }
+        if (company==null) { // No results.
+            var err = new Error('Company not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Success.
+        res.render('company_form', { title: 'Update Company', company: company });
+    });
 
 };
 
 
 // Handle company update on POST.
-exports.company_update_post = [
+exports.company_update_post = function (req, res, next) {
 
-    // Convert the firm to an array.
-    (req, res, next) => {
-        if(!(req.body.firm instanceof Array)){
-            if(typeof req.body.firm==='undefined')
-            req.body.firm=[];
-            else
-            req.body.firm=new Array(req.body.firm);
-        }
-        next();
-    },
-
-    // Validate fields.
-    body('company_name', 'Title must not be empty.').isLength({ min: 1 }).trim(),
-    // body('titan', 'Titan must not be empty.').isLength({ min: 1 }).trim(),
-    body('leadership_page_url', 'Bloomberg URL must not be empty.').isLength({ min: 1 }).trim(),
-
-    // Sanitize fields.
-    // sanitizeBody('company_name').trim().escape(),
-    // sanitizeBody('titan').trim().escape(),
-    // sanitizeBody('leadership_page_url').trim().escape(),
-    // sanitizeBody('firm.*').trim().escape(),
-
-    // Process request after validation and sanitization.
-    (req, res, next) => {
-
-        // Extract the validation errors from a request.
-        const errors = validationResult(req);
-
-        // Add a Company object with escaped/trimmed data and old id.
-        var company = new Company(
-          { company_name: req.body.company_name,
+    var company = new Company(
+        {
+            company_name: req.body.company_name,
             investment_date: req.body.investment_date,
-            // titan: req.body.titan,
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
-            firm: (typeof req.body.firm==='undefined') ? [] : req.body.firm,
-            _id:req.params.id // This is required, or a new ID will be assigned!
-           });
+            firm: req.body.firm,
+            _id: req.params.id // This is required, or a new ID will be assigned!
+        });
 
-        if (!errors.isEmpty()) {
-            // There are errors. Render form again with sanitized values/error messages.
+    Company.findByIdAndUpdate(req.params.id, company, {}, function (err,thecompany) {
+        if (err) { return next(err); }
+        // Successful - redirect to firm detail page.
+        res.redirect(thecompany.url);
+    });
 
-            // Get all titans and firms for form
-            async.parallel({
-                titans: function(callback) {
-                    Titan.find(callback);
-                },
-                firms: function(callback) {
-                    Firm.find(callback);
-                },
-            }, function(err, results) {
-                if (err) { return next(err); }
-
-                // Mark our selected firms as checked.
-                for (let i = 0; i < results.firms.length; i++) {
-                    if (company.firm.indexOf(results.firms[i]._id) > -1) {
-                        results.firms[i].checked='true';
-                    }
-                }
-                res.render('company_form', { title: 'Update Company',titans:results.titans, firms:results.firms, company: company, errors: errors.array() });
-            });
-            return;
-        }
-        else {
-            // Data from form is valid. Update the record.
-            Company.findByIdAndUpdate(req.params.id, company, {}, function (err,thecompany) {
-                if (err) { return next(err); }
-                   // Successful - redirect to company detail page.
-                   res.redirect(thecompany.url);
-                });
-        }
-    }
-];
+};
 

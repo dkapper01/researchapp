@@ -14,28 +14,28 @@ var company_instance_controller = require('../controllers/companyinstanceControl
 // GET data home page.
 router.get('/', company_controller.index);
 
-// GET request for creating a Compnay. NOTE This must come before routes that display Compnay (uses id).
+// GET request for creating a Company. NOTE This must come before routes that display Company (uses id).
 router.get('/company/add', company_controller.company_add_get);
 
-// POST request for creating Compnay.
+// POST request for creating Company.
 router.post('/company/add', company_controller.company_add_post);
 
-// GET request to delete Compnay.
+// GET request to delete Company.
 router.get('/company/:id/delete', company_controller.company_delete_get);
 
-// POST request to delete Compnay.
+// POST request to delete Company.
 router.post('/company/:id/delete', company_controller.company_delete_post);
 
-// GET request to update Compnay.
+// GET request to update Company.
 router.get('/company/:id/update', company_controller.company_update_get);
 
-// POST request to update Compnay.
+// POST request to update Company.
 router.post('/company/:id/update', company_controller.company_update_post);
 
-// GET request for one Compnay.
+// GET request for one Company.
 router.get('/company/:id', company_controller.company_detail);
 
-// GET request for list of all Compnay.
+// GET request for list of all Company.
 router.get('/companys', company_controller.company_list);
 
 /// TITAN ROUTES ///
@@ -94,28 +94,28 @@ router.get('/firms', firm_controller.firm_list);
 
 /// COMPANYINSTANCE ROUTES ///
 
-// GET request for creating a CompnayInstance. NOTE This must come before route that displays CompnayInstance (uses id).
+// GET request for creating a CompanyInstance. NOTE This must come before route that displays CompanyInstance (uses id).
 router.get('/companyinstance/add', company_instance_controller.companyinstance_add_get);
 
-// POST request for creating CompnayInstance.
+// POST request for creating CompanyInstance.
 router.post('/companyinstance/add', company_instance_controller.companyinstance_add_post);
 
-// GET request to delete CompnayInstance.
+// GET request to delete CompanyInstance.
 router.get('/companyinstance/:id/delete', company_instance_controller.companyinstance_delete_get);
 
-// POST request to delete CompnayInstance.
+// POST request to delete CompanyInstance.
 router.post('/companyinstance/:id/delete', company_instance_controller.companyinstance_delete_post);
 
-// GET request to update CompnayInstance.
+// GET request to update CompanyInstance.
 router.get('/companyinstance/:id/update', company_instance_controller.companyinstance_update_get);
 
-// POST request to update CompnayInstance.
+// POST request to update CompanyInstance.
 router.post('/companyinstance/:id/update', company_instance_controller.companyinstance_update_post);
 
-// GET request for one CompnayInstance.
+// GET request for one CompanyInstance.
 router.get('/companyinstance/:id', company_instance_controller.companyinstance_detail);
 
-// GET request for list of all CompnayInstance.
+// GET request for list of all CompanyInstance.
 router.get('/companyinstances', company_instance_controller.companyinstance_list);
 
 

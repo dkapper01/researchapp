@@ -1,6 +1,6 @@
 var Titan = require('../models/titan')
 var async = require('async')
-var Compnay = require('../models/company')
+var Company = require('../models/company')
 
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -9,11 +9,11 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.titan_list = function (req, res, next) {
 
     Titan.find()
-        .sort([['bloomberg_url', 'ascending']])
+        .sort([['bloomberg_url', 'descending']])
         .exec(function (err, list_titans) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('titan_list', { title: 'Titan List', titan_list: list_titans });
+            res.render('titan_list', { title: 'Titan List', titan_lists: list_titans });
         })
 
 };
@@ -27,7 +27,7 @@ exports.titan_detail = function (req, res, next) {
                 .exec(callback)
         },
         titans_companys: function (callback) {
-            Compnay.find({ 'titan': req.params.id }, 'title leadership_page_url')
+            Company.find({ 'titan': req.params.id }, 'title leadership_page_url')
                 .exec(callback)
         },
     }, function (err, results) {
@@ -51,47 +51,52 @@ exports.titan_add_get = function (req, res, next) {
 // Handle Titan add on POST.
 exports.titan_add_post = [
 
-    // Validate fields.
-    body('titan_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.'),
-        // .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-    body('bloomberg_url').isLength({ min: 1 }).trim().withMessage('Family name must be specified.'),
-        // .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
-    body('start_date', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
 
-    // Sanitize fields.
-    // sanitizeBody('titan_name').trim().escape(),
-    // sanitizeBody('bloomberg_url').trim().escape(),
-    // sanitizeBody('start_date').toDate(),
+    // Sanitize (trim and escape) the name field.
+    sanitizeBody('titan_name').trim().escape(),
+    sanitizeBody('start_date').toDate(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
 
-        // Extract the validation errors from a request.
-        const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            // There are errors. Render form again with sanitized values/errors messages.
-            res.render('titan_form', { title: 'Add Titan', titan: req.body, errors: errors.array() });
-            return;
+    // Add a titan object with escaped and trimmed data.
+    var titan = new Titan(
+        {
+            titan_name: req.body.titan_name,
+            start_date: req.body.start_date,
+            bloomberg_url: req.body.bloomberg_url,
+            linkedin_url: req.body.linkedin_url,
+        }
+
+    );
+
+
+// Data from form is valid.
+// Check if Titan with same name already exists.
+Titan.findOne({'titan_name': req.body.titan_name})
+    .exec(function (err, found_titan) {
+        if (err) {
+            return next(err);
+        }
+
+        if (found_titan) {
+            // Titan exists, redirect to its detail page.
+            res.redirect(found_titan.url);
         }
         else {
-            // Data from form is valid.
-
-            // Add an Titan object with escaped and trimmed data.
-            var titan = new Titan(
-                {
-                    titan_name: req.body.titan_name,
-                    start_date: req.body.start_date,
-                    bloomberg_url: req.body.bloomberg_url,
-                    linkedin_url: req.body.linkedin_url
-                });
             titan.save(function (err) {
-                if (err) { return next(err); }
-                // Successful - redirect to new titan record.
+                if (err) {
+                    return next(err);
+                }
+                // Titan saved. Redirect to titan detail page.
                 res.redirect(titan.url);
             });
+
         }
-    }
+
+    });
+}
 ];
 
 
@@ -104,7 +109,7 @@ exports.titan_delete_get = function (req, res, next) {
             Titan.findById(req.params.id).exec(callback)
         },
         titans_companys: function (callback) {
-            Compnay.find({ 'titan': req.params.id }).exec(callback)
+            Company.find({ 'titan': req.params.id }).exec(callback)
         },
     }, function (err, results) {
         if (err) { return next(err); }
@@ -125,7 +130,7 @@ exports.titan_delete_post = function (req, res, next) {
             Titan.findById(req.body.titanid).exec(callback)
         },
         titans_companys: function (callback) {
-            Compnay.find({ 'titan': req.body.titanid }).exec(callback)
+            Company.find({ 'titan': req.body.titanid }).exec(callback)
         },
     }, function (err, results) {
         if (err) { return next(err); }
@@ -164,50 +169,66 @@ exports.titan_update_get = function (req, res, next) {
     });
 };
 
-// Handle Titan update on POST.
+
 exports.titan_update_post = [
 
     // Validate fields.
-    body('titan_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.'),
-        // .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-    body('bloomberg_url').isLength({ min: 1 }).trim().withMessage('Family name must be specified.'),
-        // .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
-    body('start_date', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
 
     // Sanitize fields.
-    // sanitizeBody('titan_name').trim().escape(),
-    // sanitizeBody('bloomberg_url').trim().escape(),
-    // sanitizeBody('start_date').toDate(),
+    sanitizeBody('start_date').toDate(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
 
-        // Extract the validation errors from a request.
-        const errors = validationResult(req);
+    // Extract the validation errors from a request.
 
-        // Add Titan object with escaped and trimmed data (and the old id!)
-        var titan = new Titan(
-            {
-                titan_name: req.body.titan_name,
-                start_date: req.body.start_date,
-                bloomberg_url: req.body.bloomberg_url,
-                linkedin_url: req.body.linkedin_url,
-                _id: req.params.id
-            }
-        );
-
-        if (!errors.isEmpty()) {
-            // There are errors. Render the form again with sanitized values and error messages.
-            res.render('titan_form', { title: 'Update Titan', titan: titan, errors: errors.array() });
-            return;
-        }
-        else {
-            // Data from form is valid. Update the record.
-            Titan.findByIdAndUpdate(req.params.id, titan, {}, function (err, thetitan) {
-                if (err) { return next(err); }
-                // Successful - redirect to firm detail page.
-                res.redirect(thetitan.url);
-            });
-        }
+// Create Titan object with escaped and trimmed data (and the old id!)
+var titan = new Titan(
+    {
+        titan_name: req.body.titan_name,
+        start_date: req.body.start_date,
+        bloomberg_url: req.body.bloomberg_url,
+        linkedin_url: req.body.linkedin_url,
+        _id: req.params.id
     }
+);
+
+
+
+    // Data from form is valid. Update the record.
+    Titan.findByIdAndUpdate(req.params.id, titan, {}, function (err, thetitan) {
+        if (err) { return next(err); }
+        // Successful - redirect to genre detail page.
+        res.redirect(thetitan.url);
+    });
+
+}
 ];
+
+
+
+
+
+
+// // Handle Titan update on POST.
+// exports.titan_update_post = function (req, res, next) {
+//
+//     var titan = new Titan(
+//         {
+//             titan_name: req.body.titan_name,
+//             start_date: req.body.start_date,
+//             bloomberg_url: req.body.bloomberg_url,
+//             linkedin_url: req.body.linkedin_url,
+//             _id: req.params.id
+//         }
+//     );
+//
+//     // Data from form is valid. Update the record.
+//     Titan.findByIdAndUpdate(req.params.id, titan, {}, function (err, thetitan) {
+//         if (err) {
+//             return next(err);
+//         }
+//         // Successful - redirect to firm detail page.
+//         res.redirect(thetitan.url);
+//     });
+// };

@@ -14,12 +14,14 @@ block content
                     th
             tbody
                 - var count = 0
-                each company in firm_companys
+                each val in firm_company
                     tr
                         td(class='count_width') #{++count}
                         td(class='main_width')
-                            a(href=company.url) #{company.company_name}
+                            a(href=val.url) #{val.company_name}
                         td
+                else
+                    p This genre has no books.
 
 
     hr

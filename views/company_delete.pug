@@ -5,22 +5,16 @@ block content
   h1 #{company.company_name}
     h4
       u Portfolio Company Information
-  
-  p #[strong Titan:]
-    a(href=company.titan.url) #{company.titan.name}
+
   p #[strong Investment date:] #{company.investment_date}
   p #[strong Bloomberg URL:] #{company.leadership_page_url}
   p #[strong Titanhouse URL:] #{company.titanhouse_url}
-  p #[strong Firm:]
-    each val in company.firm
-      a(href=val.url) #{val.name}
-      |, 
 
   hr
   
   if company_instances.length
   
-    p #[strong Delete the following copies before attempting to delete this Compnay.]
+    p #[strong Delete the following copies before attempting to delete this Company.]
   
     div(style='margin-left:20px;margin-top:20px')
 
@@ -41,7 +35,7 @@ block content
             a(href=company_copy.url) #{company_copy._id}
 
   else
-    p Do you really want to delete this Compnay?
+    p Do you really want to delete this Company?
     
     form(method='POST' action='')
       div.form-group

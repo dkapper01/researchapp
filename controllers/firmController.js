@@ -1,5 +1,5 @@
 var Firm = require('../models/firm');
-var Compnay = require('../models/company');
+var Company = require('../models/company');
 var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
@@ -27,10 +27,9 @@ exports.firm_detail = function(req, res, next) {
             Firm.findById(req.params.id)
               .exec(callback);
         },
-
-        firm_companys: function(callback) {
-          Compnay.find({ 'firm': req.params.id })
-          .exec(callback);
+        firm_company: function(callback) {
+            Company.find({ 'firm': req.params.id })
+                .exec(callback);
         },
 
     }, function(err, results) {
@@ -41,7 +40,7 @@ exports.firm_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('firm_detail', { title: 'Firm Detail', firm: results.firm, firm_companys: results.firm_companys } );
+        res.render('firm_detail', { title: 'Firm Detail', firm: results.firm, firm_company: results.firm_company } );
     });
 
 };
@@ -54,8 +53,6 @@ exports.firm_add_get = function(req, res, next) {
 // Handle Firm add on POST.
 exports.firm_add_post = [
 
-    // Validate that the name field is not empty.
-    body('firm_name', 'Firm name required').isLength({ min: 1 }).trim(),
 
     // Sanitize (trim and escape) the name field.
     sanitizeBody('firm_name').trim().escape(),
@@ -63,44 +60,41 @@ exports.firm_add_post = [
     // Process request after validation and sanitization.
     (req, res, next) => {
 
-        // Extract the validation errors from a request.
-        const errors = validationResult(req);
 
-        // Add a firm object with escaped and trimmed data.
-        var firm = new Firm(
-          { firm_name: req.body.firm_name }
-        );
+    // Add a firm object with escaped and trimmed data.
+    var firm = new Firm(
+        {
+            firm_name: req.body.firm_name,
+            company: req.body.company
+
+        });
 
 
-        if (!errors.isEmpty()) {
-            // There are errors. Render the form again with sanitized values/error messages.
-            res.render('firm_form', { title: 'Add Firm', firm: firm, errors: errors.array()});
-        return;
+// Data from form is valid.
+// Check if Firm with same name already exists.
+Firm.findOne({'firm_name': req.body.firm_name})
+    .exec(function (err, found_firm) {
+        if (err) {
+            return next(err);
+        }
+
+        if (found_firm) {
+            // Firm exists, redirect to its detail page.
+            res.redirect(found_firm.url);
         }
         else {
-            // Data from form is valid.
-            // Check if Firm with same name already exists.
-            Firm.findOne({ 'firm_name': req.body.firm_name })
-                .exec( function(err, found_firm) {
-                     if (err) { return next(err); }
+            firm.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+                // Firm saved. Redirect to firm detail page.
+                res.redirect(firm.url);
+            });
 
-                     if (found_firm) {
-                         // Firm exists, redirect to its detail page.
-                         res.redirect(found_firm.url);
-                     }
-                     else {
-
-                         firm.save(function (err) {
-                           if (err) { return next(err); }
-                           // Firm saved. Redirect to firm detail page.
-                           res.redirect(firm.url);
-                         });
-
-                     }
-
-                 });
         }
-    }
+
+    });
+}
 ];
 
 // Display Firm delete form on GET.
@@ -111,7 +105,7 @@ exports.firm_delete_get = function(req, res, next) {
             Firm.findById(req.params.id).exec(callback);
         },
         firm_companys: function(callback) {
-            Compnay.find({ 'firm': req.params.id }).exec(callback);
+            Company.find({ 'firm': req.params.id }).exec(callback);
         },
     }, function(err, results) {
         if (err) { return next(err); }
@@ -132,7 +126,7 @@ exports.firm_delete_post = function(req, res, next) {
             Firm.findById(req.params.id).exec(callback);
         },
         firm_companys: function(callback) {
-            Compnay.find({ 'firm': req.params.id }).exec(callback);
+            Company.find({ 'firm': req.params.id }).exec(callback);
         },
     }, function(err, results) {
         if (err) { return next(err); }
