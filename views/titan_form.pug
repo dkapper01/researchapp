@@ -17,7 +17,7 @@ block content
       label(for='linkedin_url') Linkedin URL:
       input#linkedin_url.form-control(type='text', placeholder='' name='linkedin_url' value=(undefined === titan ? '' : titan.linkedin_url))
     div.form-group
-      label(for='company') Firm:
+      label(for='company') Company:
       select#company.form-control(type='select', placeholder='Select Company' name='company' required='true' )
         for company in company_list
             option(value=company._id, selected=(selected_company == company._id.toString() ? 'selected' : false) ) #{company.company_name}

@@ -14,16 +14,6 @@ block content
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
   div(style='margin-left:20px;margin-top:20px')
 
-    h4 Companys
-
-    dl
-    each company in titan_companys
-      dt
-        a(href=company.url) #{company.title}
-      dd #{company.leadership_page_url}
-
-    else
-      p This titan has no companys.
 
   hr
   p

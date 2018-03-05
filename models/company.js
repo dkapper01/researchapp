@@ -4,12 +4,14 @@ var moment = require('moment'); // For date handling.
 var Schema = mongoose.Schema;
 
 var CompanySchema = new Schema({
-    titan: { type: Schema.ObjectId, ref: 'Titan', required: true },
+
     company_name: {type: String, required: true},
     investment_date: { type: Date },
     leadership_page_url: {type: String},
     titanhouse_url: {type: String},
+    titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }],
     firm: { type: Schema.ObjectId, ref: 'Firm', required: true }
+
 });
 
 // Virtual for this company instance URL.

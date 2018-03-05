@@ -23,7 +23,6 @@ exports.firm_detail = function(req, res, next) {
 
     async.parallel({
         firm: function(callback) {
-
             Firm.findById(req.params.id)
               .exec(callback);
         },

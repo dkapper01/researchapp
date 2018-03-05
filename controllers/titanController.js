@@ -52,6 +52,18 @@ exports.titan_add_get = function (req, res, next) {
             if(err) { return next(err); }
             res.render('titan_form', {title: 'Add Titan', company_list:companys });
         });
+
+
+    // async.parallel({
+    //         companys: function(callback) {
+    //             Company.find(callback);
+    //         },
+    //
+    //     },
+    //     function(err, results) {
+    //         if (err) { return next(err); }
+    //         res.render('titan_form', { title: 'Create Company',companys:results.companys });
+    //     });
 };
 
 // Handle Titan add on POST.
@@ -69,11 +81,12 @@ exports.titan_add_post = [
     // Add a titan object with escaped and trimmed data.
     var titan = new Titan(
         {
-            company: req.body.firm,
+            company: req.body.company,
             titan_name: req.body.titan_name,
             start_date: req.body.start_date,
             bloomberg_url: req.body.bloomberg_url,
-            linkedin_url: req.body.linkedin_url,
+            linkedin_url: req.body.linkedin_url
+
         });
 
 
@@ -161,17 +174,26 @@ exports.titan_delete_post = function (req, res, next) {
 // Display Titan update form on GET.
 exports.titan_update_get = function (req, res, next) {
 
-    Titan.findById(req.params.id, function (err, titan) {
+    // Get book, authors and genres for form.
+    async.parallel({
+        titan: function(callback) {
+            Titan.findById(req.params.id);
+        },
+        companys: function(callback) {
+            Company.find(callback);
+        },
+    }, function(err, results) {
         if (err) { return next(err); }
-        if (titan == null) { // No results.
+        if (results.book==null) { // No results.
             var err = new Error('Titan not found');
             err.status = 404;
             return next(err);
         }
         // Success.
-        res.render('titan_form', { title: 'Update Titan', titan: titan });
 
+        res.render('titan_form', { title: 'Update Titan', titan:results.titan, companys: results.companys });
     });
+
 };
 
 
@@ -194,6 +216,7 @@ var titan = new Titan(
         start_date: req.body.start_date,
         bloomberg_url: req.body.bloomberg_url,
         linkedin_url: req.body.linkedin_url,
+        company: req.body.firm,
         _id: req.params.id
     }
 );
