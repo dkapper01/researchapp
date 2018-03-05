@@ -1,7 +1,6 @@
 var Company = require('../models/company');
 var Titan = require('../models/titan');
 var Firm = require('../models/firm');
-var CompanyInstance = require('../models/companyinstance');
 var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
@@ -12,12 +11,6 @@ exports.index = function(req, res) {
     async.parallel({
         company_count: function(callback) {
             Company.count(callback);
-        },
-        company_instance_count: function(callback) {
-            CompanyInstance.count(callback);
-        },
-        company_instance_available_count: function(callback) {
-            CompanyInstance.count({status:'Available'},callback);
         },
         titan_count: function(callback) {
             Titan.count(callback);
@@ -138,9 +131,6 @@ exports.company_delete_get = function(req, res, next) {
         company: function(callback) {
             Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
         },
-        company_companyinstances: function(callback) {
-            CompanyInstance.find({ 'company': req.params.id }).exec(callback);
-        },
     }, function(err, results) {
         if (err) { return next(err); }
         if (results.company==null) { // No results.
@@ -160,9 +150,6 @@ exports.company_delete_post = function(req, res, next) {
     async.parallel({
         company: function(callback) {
             Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
-        },
-        company_companyinstances: function(callback) {
-            CompanyInstance.find({ 'company': req.params.id }).exec(callback);
         },
     }, function(err, results) {
         if (err) { return next(err); }
@@ -203,23 +190,65 @@ exports.company_update_get = function(req, res, next) {
 
 
 // Handle company update on POST.
-exports.company_update_post = function (req, res, next) {
+exports.company_update_post = [
+
+    // Sanitize (trim and escape) the name field.
+    sanitizeBody('company_name').trim().escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
 
     var company = new Company(
         {
+            firm: req.body.firm,
             company_name: req.body.company_name,
             investment_date: req.body.investment_date,
             leadership_page_url: req.body.leadership_page_url,
-            titanhouse_url: req.body.titanhouse_url,
-            firm: req.body.firm,
-            _id: req.params.id // This is required, or a new ID will be assigned!
+            titanhouse_url: req.body.titanhouse_url
+
         });
 
-    Company.findByIdAndUpdate(req.params.id, company, {}, function (err,thecompany) {
-        if (err) { return next(err); }
-        // Successful - redirect to firm detail page.
-        res.redirect(thecompany.url);
+
+// Data from form is valid.
+// Check if Firm with same name already exists.
+Company.findOne({'company_name': req.body.company_name})
+    .exec(function (err, found_company) {
+        if (err) {
+            return next(err);
+        }
+
+        if (found_company) {
+            // Firm exists, redirect to its detail page.
+            res.redirect(found_company.url);
+        }
+        else {
+            company.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+                // Firm saved. Redirect to company detail page.
+                res.redirect(company.url);
+            });
+
+        }
+
     });
+}
+];
 
-};
-
+// var company = new Company(
+//     {
+//         company_name: req.body.company_name,
+//         investment_date: req.body.investment_date,
+//         leadership_page_url: req.body.leadership_page_url,
+//         titanhouse_url: req.body.titanhouse_url,
+//         firm: req.body.firm,
+//         _id: req.params.id // This is required, or a new ID will be assigned!
+//     });
+//
+// Company.findByIdAndUpdate(req.params.id, company, {}, function (err,thecompany) {
+//     if (err) { return next(err); }
+//     // Successful - redirect to firm detail page.
+//     res.redirect(thecompany.url);
+// });

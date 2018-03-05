@@ -45,7 +45,14 @@ exports.titan_detail = function (req, res, next) {
 
 // Display Titan add form on GET.
 exports.titan_add_get = function (req, res, next) {
-    res.render('titan_form', { title: 'Add Titan' });
+    // res.render('titan_form', { title: 'Add Titan' });
+
+    Company.find({},'company_name')
+        .exec(function (err, companys) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('titan_form', {title: 'Add Titan', company_list:companys } );
+        });
 };
 
 // Handle Titan add on POST.
@@ -54,7 +61,7 @@ exports.titan_add_post = [
 
     // Sanitize (trim and escape) the name field.
     sanitizeBody('titan_name').trim().escape(),
-    sanitizeBody('start_date').toDate(),
+    // sanitizeBody('start_date').toDate(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -63,10 +70,12 @@ exports.titan_add_post = [
     // Add a titan object with escaped and trimmed data.
     var titan = new Titan(
         {
+            company: req.body.company,
             titan_name: req.body.titan_name,
             start_date: req.body.start_date,
             bloomberg_url: req.body.bloomberg_url,
             linkedin_url: req.body.linkedin_url,
+            titan: req.body.titan
         }
 
     );
@@ -185,6 +194,7 @@ exports.titan_update_post = [
 // Create Titan object with escaped and trimmed data (and the old id!)
 var titan = new Titan(
     {
+        company: req.body.company,
         titan_name: req.body.titan_name,
         start_date: req.body.start_date,
         bloomberg_url: req.body.bloomberg_url,

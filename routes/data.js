@@ -6,7 +6,6 @@ var router = express.Router();
 var company_controller = require('../controllers/companyController');
 var titan_controller = require('../controllers/titanController');
 var firm_controller = require('../controllers/firmController');
-var company_instance_controller = require('../controllers/companyinstanceController');
 
 
 /// COMPANY ROUTES ///
@@ -90,33 +89,6 @@ router.get('/firm/:id', firm_controller.firm_detail);
 
 // GET request for list of all Firm.
 router.get('/firms', firm_controller.firm_list);
-
-
-/// COMPANYINSTANCE ROUTES ///
-
-// GET request for creating a CompanyInstance. NOTE This must come before route that displays CompanyInstance (uses id).
-router.get('/companyinstance/add', company_instance_controller.companyinstance_add_get);
-
-// POST request for creating CompanyInstance.
-router.post('/companyinstance/add', company_instance_controller.companyinstance_add_post);
-
-// GET request to delete CompanyInstance.
-router.get('/companyinstance/:id/delete', company_instance_controller.companyinstance_delete_get);
-
-// POST request to delete CompanyInstance.
-router.post('/companyinstance/:id/delete', company_instance_controller.companyinstance_delete_post);
-
-// GET request to update CompanyInstance.
-router.get('/companyinstance/:id/update', company_instance_controller.companyinstance_update_get);
-
-// POST request to update CompanyInstance.
-router.post('/companyinstance/:id/update', company_instance_controller.companyinstance_update_post);
-
-// GET request for one CompanyInstance.
-router.get('/companyinstance/:id', company_instance_controller.companyinstance_detail);
-
-// GET request for list of all CompanyInstance.
-router.get('/companyinstances', company_instance_controller.companyinstance_list);
 
 
 module.exports = router;

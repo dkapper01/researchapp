@@ -8,7 +8,7 @@ var CompanySchema = new Schema({
     investment_date: { type: Date },
     leadership_page_url: {type: String},
     titanhouse_url: {type: String},
-    firm: { type: Schema.ObjectId, ref: 'Firm', required: true }
+    titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }]
 });
 
 // Virtual for this company instance URL.
