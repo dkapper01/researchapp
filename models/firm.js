@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var Firm = require('../models/firm');
+var Company = require('../models/company');
 
 var Schema = mongoose.Schema;
 

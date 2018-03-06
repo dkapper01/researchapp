@@ -18,9 +18,12 @@ block content
       input#titanhouse_url.form-control(type='text', placeholder='' name='titanhouse_url' value=(undefined === company ? '' : company.titanhouse_url) )
     //div.form-group
     //  label(for='firm') Firm:
-    //  select#firm.form-control(type='select', placeholder='Select firm' name='firm' required='true' )
-    //    for firm in firm_list
-    //      option(value=firm._id, selected=(selected_firm==firm._id.toString() ? 'selected' : false) ) #{firm.firm_name}
+    //  input#firm.form-control(type='text', placeholder='' name='firm' value=(undefined === company ? '' : firm._id) )
+    div.form-group
+      label(for='firm') Firm:
+      select#firm.form-control(type='select', placeholder='Select firm' name='firm' required='true' )
+        for firm in firm_list
+          option(value=firm._id, selected=(selected_firm==firm._id.toString() ? 'selected' : false) ) #{firm.firm_name}
     //div.form-group
     //    label(for='firm') Firm:
     //    input#firm.form-control(type='text', placeholder='' name='firm' value=(undefined === company ? '' : company.firm) )

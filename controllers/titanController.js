@@ -28,9 +28,9 @@ exports.titan_detail = function (req, res, next) {
             Titan.findById(req.params.id)
                 .populate('company')
                 .populate({
-                path: 'company',
-                populate: { path: 'firm' }
-            }).exec(callback);
+                    path: 'company',
+                    populate: { path: 'firm' }
+                }).exec(callback);
         },
 
         // titan_companys: function (callback) {
@@ -209,25 +209,25 @@ exports.titan_update_post = [
     // Extract the validation errors from a request.
 
 // Create Titan object with escaped and trimmed data (and the old id!)
-var titan = new Titan(
-    {
-        company: req.body.firm,
-        titan_name: req.body.titan_name,
-        start_date: req.body.start_date,
-        bloomberg_url: req.body.bloomberg_url,
-        linkedin_url: req.body.linkedin_url,
-        _id: req.params.id
-    }
-);
+    var titan = new Titan(
+        {
+            company: req.body.firm,
+            titan_name: req.body.titan_name,
+            start_date: req.body.start_date,
+            bloomberg_url: req.body.bloomberg_url,
+            linkedin_url: req.body.linkedin_url,
+            _id: req.params.id
+        }
+    );
 
 
 
-    // Data from form is valid. Update the record.
-    Titan.findByIdAndUpdate(req.params.id, titan, {}, function (err, thetitan) {
-        if (err) { return next(err); }
-        // Successful - redirect to genre detail page.
-        res.redirect(thetitan.url);
-    });
+// Data from form is valid. Update the record.
+Titan.findByIdAndUpdate(req.params.id, titan, {}, function (err, thetitan) {
+    if (err) { return next(err); }
+    // Successful - redirect to genre detail page.
+    res.redirect(thetitan.url);
+});
 
 }
 ];

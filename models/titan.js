@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var Firm = require('../models/firm');
+var Company = require('../models/company');
 var moment = require('moment'); // For date handling.
 
 var Schema = mongoose.Schema;
