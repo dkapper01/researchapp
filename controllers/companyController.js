@@ -41,9 +41,14 @@ exports.company_list = function(req, res, next) {
 exports.company_detail = function(req, res, next) {
 
     async.parallel({
+        // company: function(callback) {
+        //     Company.findById(req.params.id)
+        //       .exec(callback);
+        // },
         company: function(callback) {
             Company.findById(req.params.id)
-              .exec(callback);
+                .populate('firm')
+                .exec(callback);
         },
         company_titan: function(callback) {
             Titan.find({ 'company': req.params.id })
@@ -58,8 +63,9 @@ exports.company_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('company_detail', { title: 'Company Detail', company:  results.company, company_titan: results.company_titan } );
+        res.render('company_detail', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
     });
+
 };
 
 // Display company add form on GET.

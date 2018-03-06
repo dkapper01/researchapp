@@ -4,8 +4,8 @@ block content
     h1 #{company.company_name}
     h4
         u Company Information
-    p #[strong Frim:]
-        a(href=company.firm.url) #{company.firm}
+    p #[strong Firm: ]
+        a(href=company.firm.url) #{company.firm.firm_name}
     p #[strong Investment date:] #{company.investment_date}
         - var leadership = company.leadership_page_url;
     p #[strong Leadership Page URL: ]

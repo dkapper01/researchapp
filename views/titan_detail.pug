@@ -5,6 +5,11 @@ block content
   h1 #{titan.titan_name}
   h4
     u Titan Information
+
+  p #[strong Firm: ]
+    a(href=titan.company.firm.url) #{titan.company.firm.firm_name}
+  p #[strong Company: ]
+    a(href=titan.company.url) #{titan.company.company_name}
   p #[strong Start Date:] #{titan.start_date}
   - var bb_url = titan.bloomberg_url
   p #[strong Bloomberg URL:]
@@ -12,7 +17,7 @@ block content
   - var li_url = titan.bloomberg_url
   p #[strong Linkedin URL:]
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
-  div(style='margin-left:20px;margin-top:20px')
+  //div(style='margin-left:20px;margin-top:20px')
 
 
   hr

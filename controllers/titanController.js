@@ -1,4 +1,5 @@
 var Titan = require('../models/titan')
+var Firm = require('../models/firm');
 var async = require('async')
 var Company = require('../models/company')
 
@@ -22,14 +23,20 @@ exports.titan_list = function (req, res, next) {
 exports.titan_detail = function (req, res, next) {
 
     async.parallel({
+
         titan: function (callback) {
             Titan.findById(req.params.id)
-                .exec(callback)
+                .populate('company')
+                .populate({
+                path: 'company',
+                populate: { path: 'firm' }
+            }).exec(callback);
         },
-        titan_companys: function (callback) {
-            Company.find({ 'company': req.params.id })
-                .exec(callback)
-        },
+
+        // titan_companys: function (callback) {
+        //     Company.find({ 'company': req.params.id })
+        //         .exec(callback)
+        // },
     }, function (err, results) {
         if (err) { return next(err); } // Error in API usage.
         if (results.titan == null) { // No results.
@@ -38,7 +45,7 @@ exports.titan_detail = function (req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('titan_detail', { title: 'Titan Detail', titan: results.titan, titan_companys: results.titan_companys });
+        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys });
     });
 
 };
@@ -174,24 +181,16 @@ exports.titan_delete_post = function (req, res, next) {
 // Display Titan update form on GET.
 exports.titan_update_get = function (req, res, next) {
 
-    // Get book, authors and genres for form.
-    async.parallel({
-        titan: function(callback) {
-            Titan.findById(req.params.id);
-        },
-        companys: function(callback) {
-            Company.find(callback);
-        },
-    }, function(err, results) {
+    Titan.findById(req.params.id, function (err, titan) {
         if (err) { return next(err); }
-        if (results.book==null) { // No results.
+        if (titan == null) { // No results.
             var err = new Error('Titan not found');
             err.status = 404;
             return next(err);
         }
         // Success.
+        res.render('titan_form', { title: 'Update Titan', titan: titan });
 
-        res.render('titan_form', { title: 'Update Titan', titan:results.titan, companys: results.companys });
     });
 
 };
@@ -212,11 +211,11 @@ exports.titan_update_post = [
 // Create Titan object with escaped and trimmed data (and the old id!)
 var titan = new Titan(
     {
+        company: req.body.firm,
         titan_name: req.body.titan_name,
         start_date: req.body.start_date,
         bloomberg_url: req.body.bloomberg_url,
         linkedin_url: req.body.linkedin_url,
-        company: req.body.firm,
         _id: req.params.id
     }
 );
