@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b924b429-f1ff-4952-ad44-503db7334573" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/companyController.js" afterPath="$PROJECT_DIR$/controllers/companyController.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/firmController.js" afterPath="$PROJECT_DIR$/controllers/firmController.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/titanController.js" afterPath="$PROJECT_DIR$/controllers/titanController.js" />
-      <change beforePath="$PROJECT_DIR$/views/firm_detail.pug" afterPath="$PROJECT_DIR$/views/firm_detail.pug" />
       <change beforePath="$PROJECT_DIR$/views/layout.pug" afterPath="$PROJECT_DIR$/views/layout.pug" />
-      <change beforePath="$PROJECT_DIR$/views/titan_detail.pug" afterPath="$PROJECT_DIR$/views/titan_detail.pug" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,8 +42,8 @@
           <file leaf-file-name="layout.pug" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/views/layout.pug">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="322">
-                  <caret line="29" column="106" lean-forward="false" selection-start-line="29" selection-start-column="106" selection-end-line="29" selection-end-column="106" />
+                <state relative-caret-position="188">
+                  <caret line="57" column="45" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="57" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
@@ -313,7 +307,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99885000" />
+    <option name="totallyTimeSpent" value="100058000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -335,7 +329,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2940341" sideWeight="0.49676898" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.50852275" sideWeight="0.49676898" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24313408" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -780,8 +774,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/layout.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="29" column="106" lean-forward="false" selection-start-line="29" selection-start-column="106" selection-end-line="29" selection-end-column="106" />
+        <state relative-caret-position="188">
+          <caret line="57" column="45" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="57" selection-end-column="45" />
           <folding />
         </state>
       </provider>
