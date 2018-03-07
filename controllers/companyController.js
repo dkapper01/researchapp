@@ -40,10 +40,6 @@ exports.company_list = function(req, res, next) {
 exports.company_detail = function(req, res, next) {
 
     async.parallel({
-        // company: function(callback) {
-        //     Company.findById(req.params.id)
-        //       .exec(callback);
-        // },
         company: function(callback) {
             Company.findById(req.params.id)
                 .populate('firm')

@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b924b429-f1ff-4952-ad44-503db7334573" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
+      <change beforePath="$PROJECT_DIR$/controllers/companyController.js" afterPath="$PROJECT_DIR$/controllers/companyController.js" />
+      <change beforePath="$PROJECT_DIR$/controllers/titanController.js" afterPath="$PROJECT_DIR$/controllers/titanController.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,76 +17,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5061263">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="firmController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/controllers/firmController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-568">
-                  <caret line="76" column="19" lean-forward="false" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="titanController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/controllers/titanController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="251" column="23" lean-forward="true" selection-start-line="251" selection-start-column="23" selection-end-line="251" selection-end-column="23" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="titan_detail.pug" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/views/titan_detail.pug">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="457">
-                  <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="company_detail.pug" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/views/company_detail.pug">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="454">
-                  <caret line="39" column="76" lean-forward="false" selection-start-line="39" selection-start-column="76" selection-end-line="39" selection-end-column="76" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="354">
-                  <caret line="39" column="15" lean-forward="true" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="companyController.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/controllers/companyController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2655">
-                  <caret line="177" column="0" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="companyController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/companyController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-262">
+              <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="titanController.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/titanController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="89" column="40" lean-forward="true" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -177,7 +130,6 @@
         <option value="$PROJECT_DIR$/views/titan_form.pug" />
         <option value="$PROJECT_DIR$/researchapp/controllers/companyController.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/controllers/titanController.js" />
         <option value="$PROJECT_DIR$/views/firm_detail.pug" />
         <option value="$PROJECT_DIR$/views/layout.pug" />
         <option value="$PROJECT_DIR$/views/company_list.pug" />
@@ -185,10 +137,11 @@
         <option value="$PROJECT_DIR$/views/titan_list.pug" />
         <option value="$PROJECT_DIR$/models/titan.js" />
         <option value="$PROJECT_DIR$/models/company.js" />
-        <option value="$PROJECT_DIR$/controllers/companyController.js" />
         <option value="$PROJECT_DIR$/views/titan_detail.pug" />
         <option value="$PROJECT_DIR$/views/company_detail.pug" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
+        <option value="$PROJECT_DIR$/controllers/companyController.js" />
+        <option value="$PROJECT_DIR$/controllers/titanController.js" />
       </list>
     </option>
   </component>
@@ -302,7 +255,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105287000" />
+    <option name="totallyTimeSpent" value="106754000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -324,10 +277,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45170453" sideWeight="0.49676898" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2528409" sideWeight="0.49676898" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14297253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23263328" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -583,14 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/company_delete.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="23" column="7" lean-forward="false" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/titan_delete.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-67">
@@ -727,26 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/companyController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2655">
-          <caret line="177" column="0" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/titanController.js">
+    <entry file="file://$PROJECT_DIR$/views/company_delete.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="251" column="23" lean-forward="true" selection-start-line="251" selection-start-column="23" selection-end-line="251" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/titan_detail.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <caret line="23" column="7" lean-forward="false" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -759,6 +688,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/titan_detail.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="111" column="1" lean-forward="true" selection-start-line="111" selection-start-column="1" selection-end-line="111" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/firmController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-568">
@@ -767,10 +712,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
+    <entry file="file://$PROJECT_DIR$/controllers/companyController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="39" column="15" lean-forward="true" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
+        <state relative-caret-position="-262">
+          <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/titanController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="89" column="40" lean-forward="true" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
           <folding />
         </state>
       </provider>

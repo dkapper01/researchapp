@@ -86,7 +86,7 @@ exports.titan_add_post = [
 
 
     // Sanitize (trim and escape) the name field.
-    sanitizeBody('titan_name').trim().escape(),
+    // sanitizeBody('titan_name').trim().escape(),
     sanitizeBody('start_date').toDate(),
 
     // Process request after validation and sanitization.
