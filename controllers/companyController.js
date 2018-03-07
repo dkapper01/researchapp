@@ -23,7 +23,6 @@ exports.index = function(req, res) {
     });
 };
 
-
 // Display list of all companys.
 exports.company_list = function(req, res, next) {
 
@@ -175,26 +174,6 @@ exports.company_delete_post = function(req, res, next) {
 
 // Display company update form on GET.
 exports.company_update_get = function(req, res, next) {
-
-    // async.parallel({
-    //     companys: function(callback) {
-    //         Company.findById(req.params.id).populate('company').exec(callback)
-    //     },
-    //     firms: function(callback) {
-    //         Firm.find(callback)
-    //     },
-    //
-    // }, function(err, results) {
-    //     if (err) { return next(err); }
-    //     if (results.company==null) { // No results.
-    //         var err = new Error('Company not found');
-    //         err.status = 404;
-    //         return next(err);
-    //     }
-    //     // Success.
-    //     res.render('company_form', { title: 'Add Company', firm_list : results.firms, company : results.company });
-    // });
-
 
 
     async.parallel({

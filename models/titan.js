@@ -25,7 +25,7 @@ TitanSchema
 TitanSchema
 .virtual('start_date_yyyy_mm_dd')
 .get(function () {
-  return moment(this.start_date).format('MMMM Do YYYY');
+  return moment(this.start_date).format('MMM Do YY');
 });
 
 // Export model.

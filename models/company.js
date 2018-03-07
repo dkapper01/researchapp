@@ -24,7 +24,7 @@ CompanySchema
 CompanySchema
 .virtual('investment_date_yyyy_mm_dd')
 .get(function () {
-    return moment(this.date_of_death).format('MMMM Do YYYY');
+    return moment(this.date_of_death).format('MMM Do YY');
 });
 
 // Export model.
