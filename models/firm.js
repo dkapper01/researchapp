@@ -9,6 +9,7 @@ var FirmSchema = new Schema({
     company: [{ type: Schema.ObjectId, ref: 'Company', required: true }]
 });
 
+
 // Virtual for this firm instance URL.
 FirmSchema
 .virtual('url')
@@ -17,4 +18,6 @@ FirmSchema
 });
 
 // Export model.
+
 module.exports = mongoose.model('Firm', FirmSchema);
+

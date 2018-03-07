@@ -12,33 +12,15 @@ block content
 
   hr
   
-  if company_instances.length
-  
-    p #[strong Delete the following copies before attempting to delete this Company.]
-  
-    div(style='margin-left:20px;margin-top:20px')
 
-      h4 Copies
+  p #[strong Delete the following copies before attempting to delete this Company.]
+
+
+
+  p Do you really want to delete this Company?
     
-        each company_copy in company_instances
-          hr
-          if company_copy.status=='Available'
-            p.text-success #{company_copy.status}
-          else if company_copy.status=='Maintenance'
-            p.text-danger #{company_copy.status}
-          else
-            p.text-warning #{company_copy.status}
-          p #[strong Imprint:] #{company_copy.imprint}
-          if company_copy.status!='Available'
-            p #[strong Due back:] #{company_copy.due_back}
-          p #[strong Id:] 
-            a(href=company_copy.url) #{company_copy._id}
+  form(method='POST' action='')
+    div.form-group
+      input#id.form-control(type='hidden',name='id', required='true', value=company._id )
 
-  else
-    p Do you really want to delete this Company?
-    
-    form(method='POST' action='')
-      div.form-group
-        input#id.form-control(type='hidden',name='id', required='true', value=company._id )
-
-      button.btn.btn-primary(type='submit') Delete
+  button.btn.btn-primary(type='submit') Delete

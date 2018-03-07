@@ -10,6 +10,8 @@ block content
     a(href=titan.company.firm.url) #{titan.company.firm.firm_name}
   p #[strong Company: ]
     a(href=titan.company.url) #{titan.company.company_name}
+  p #[strong Investment Date:] #{titan.company.investment_date}
+  p #[strong Leadership Page URL] #{titan.company.leadership_page_url}
   p #[strong Start Date:] #{titan.start_date}
   - var bb_url = titan.bloomberg_url
   p #[strong Bloomberg URL:]

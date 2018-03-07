@@ -19,7 +19,7 @@ exports.index = function(req, res) {
             Firm.count(callback);
         },
     }, function(err, results) {
-        res.render('index', { title: 'Researcher App Home', error: err, data: results });
+        res.render('index', { title: 'Researcher App', error: err, data: results });
     });
 };
 
@@ -176,15 +176,46 @@ exports.company_delete_post = function(req, res, next) {
 // Display company update form on GET.
 exports.company_update_get = function(req, res, next) {
 
-    Company.findById(req.params.id, function(err, company) {
+    // async.parallel({
+    //     companys: function(callback) {
+    //         Company.findById(req.params.id).populate('company').exec(callback)
+    //     },
+    //     firms: function(callback) {
+    //         Firm.find(callback)
+    //     },
+    //
+    // }, function(err, results) {
+    //     if (err) { return next(err); }
+    //     if (results.company==null) { // No results.
+    //         var err = new Error('Company not found');
+    //         err.status = 404;
+    //         return next(err);
+    //     }
+    //     // Success.
+    //     res.render('company_form', { title: 'Add Company', firm_list : results.firms, company : results.company });
+    // });
+
+
+
+    // Get book, authors and genres for form.
+    async.parallel({
+        company: function(callback) {
+            Company.findById(req.params.id).populate('firm').populate('titan').exec(callback);
+        },
+        firms: function(callback) {
+            Firm.find(callback);
+        },
+        titans: function(callback) {
+            Titan.find(callback);
+        },
+    }, function(err, results) {
         if (err) { return next(err); }
-        if (company==null) { // No results.
+        if (results.company==null) { // No results.
             var err = new Error('Company not found');
             err.status = 404;
             return next(err);
         }
-        // Success.
-        res.render('company_form', { title: 'Update Company', company: company });
+        res.render('company_form', { title: 'Update Company', firm_list : results.firms, titans:results.titans, company: results.company });
     });
 
 };
@@ -203,10 +234,37 @@ exports.company_update_post = function (req, res, next) {
             _id: req.params.id // This is required, or a new ID will be assigned!
         });
 
-    Company.findByIdAndUpdate(req.params.id, company, {}, function (err,thecompany) {
+        Company.findByIdAndUpdate(req.params.id, company, {}, function (err,thecompany) {
+            if (err) { return next(err); }
+            // Successful - redirect to firm detail page.
+            res.redirect(thecompany.url);
+        });
+
+};
+
+
+
+exports.company_get_new_titan = function (req, res, next) {
+    res.render('titan_form', { title: 'New Titan' });
+
+};
+
+exports.company_post_new_titan = function (req, res, next) {
+
+    var TitanSchema = new Schema(
+        {
+            titan_name: {type: String, required: true, max: 100},
+            start_date: { type: Date },
+            bloomberg_url: {type: String},
+            linkedin_url: {type: String},
+            // company: { type: Schema.ObjectId, ref: 'Company', required: true }
+        }
+    );
+
+    titan.save(function (err) {
         if (err) { return next(err); }
-        // Successful - redirect to firm detail page.
-        res.redirect(thecompany.url);
+        //successful - redirect to new book record.
+        res.redirect(titan.url);
     });
 
 };

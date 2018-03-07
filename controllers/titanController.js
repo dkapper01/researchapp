@@ -54,11 +54,19 @@ exports.titan_detail = function (req, res, next) {
 exports.titan_add_get = function (req, res, next) {
     // res.render('titan_form', { title: 'Add Titan' });
 
-    Company.find({}, 'company_name')
+
+    Company.find({},'company_name')
         .exec(function (err, companys) {
-            if(err) { return next(err); }
-            res.render('titan_form', {title: 'Add Titan', company_list:companys });
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('titan_form', {title: 'Add Titan', company_list:companys } );
         });
+
+    // Company.find({}, 'company_name')
+    //     .exec(function (err, companys) {
+    //         if(err) { return next(err); }
+    //         res.render('titan_form', {title: 'Add Titan', company_list:companys });
+    //     });
 
 
     // async.parallel({
@@ -180,17 +188,40 @@ exports.titan_delete_post = function (req, res, next) {
 
 // Display Titan update form on GET.
 exports.titan_update_get = function (req, res, next) {
+    //
+    // Titan.findById(req.params.id, function (err, titan) {
+    //     if (err) { return next(err); }
+    //     if (titan == null) { // No results.
+    //         var err = new Error('Titan not found');
+    //         err.status = 404;
+    //         return next(err);
+    //     }
+    //     // Success.
+    //     res.render('titan_form', { title: 'Update Titan', titan: titan });
+    //
+    // });
+    //
 
-    Titan.findById(req.params.id, function (err, titan) {
+
+
+    // Get book, authors and genres for form.
+    async.parallel({
+        firms: function(callback) {
+            Firm.findById(req.params.id).populate('firm').populate('company').exec(callback);
+        },
+        companys: function(callback) {
+            Company.find(callback);
+        },
+
+    }, function(err, results) {
         if (err) { return next(err); }
-        if (titan == null) { // No results.
-            var err = new Error('Titan not found');
+        if (results.company==null) { // No results.
+            var err = new Error('Company not found');
             err.status = 404;
             return next(err);
         }
         // Success.
-        res.render('titan_form', { title: 'Update Titan', titan: titan });
-
+        res.render('titan_form', { title: 'Update Titan', firms:results.firms, companys:results.companys });
     });
 
 };

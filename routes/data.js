@@ -37,6 +37,12 @@ router.get('/company/:id', company_controller.company_detail);
 // GET request for list of all Company.
 router.get('/companys', company_controller.company_list);
 
+// GET request for new titan
+router.get('/company/:id/company_get_new_titan', company_controller.company_get_new_titan);
+
+router.post('/company/:id/company_post_new_titan', company_controller.company_post_new_titan);
+
+
 /// TITAN ROUTES ///
 
 // GET request for creating Titan. NOTE This must come before route for id (i.e. display titan).
@@ -89,5 +95,15 @@ router.get('/firm/:id', firm_controller.firm_detail);
 
 // GET request for list of all Firm.
 router.get('/firms', firm_controller.firm_list);
+
+
+router.get('/firm/:id/new_company', firm_controller.new_company_get);
+
+router.post('/firm/:id/new_company', firm_controller.company_add_get);
+
+
+// GET request for one Firm.
+// router.get('/firm/:id', firm_controller.firm_detail);
+
 
 module.exports = router;

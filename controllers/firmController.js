@@ -203,3 +203,28 @@ exports.firm_update_post = [
         }
     }
 ];
+
+exports.new_company_get = function(req, res, next) {
+    res.render('company_form', { title: 'Add Company'});
+};
+
+exports.company_add_get = function(req, res, next) {
+
+    var company = new Company({
+
+        company_name: {type: String, required: true},
+        investment_date: { type: Date },
+        leadership_page_url: {type: String},
+        titanhouse_url: {type: String},
+        titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }],
+        firm: { type: Schema.ObjectId, ref: 'Firm', required: true }
+
+    });
+
+    company.save(function (err) {
+        if (err) { return next(err); }
+        //successful - redirect to new book record.
+        res.redirect(company.url);
+    });
+};
+

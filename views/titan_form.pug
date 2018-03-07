@@ -21,7 +21,6 @@ block content
         select#company.form-control(type='select', placeholder='Select company' name='company' required='true' )
           for company in company_list
             option(value=company._id, selected=(selected_company == company._id.toString() ? 'selected' : false) ) #{company.company_name}
-
     button.btn.btn-primary(type='submit') Submit
 
   if errors
