@@ -223,7 +223,7 @@ exports.company_add_get = function(req, res, next) {
 
     company.save(function (err) {
         if (err) { return next(err); }
-        //successful - redirect to new book record.
+        //successful - redirect to new company record.
         res.redirect(company.url);
     });
 };

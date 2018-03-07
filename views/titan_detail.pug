@@ -11,8 +11,10 @@ block content
   p #[strong Company: ]
     a(href=titan.company.url) #{titan.company.company_name}
   p #[strong Investment Date:] #{titan.company.investment_date}
-  p #[strong Leadership Page URL] #{titan.company.leadership_page_url}
-  p #[strong Start Date:] #{titan.start_date}
+  - var leadership = titan.company.leadership_page_url
+  p #[strong Leadership Page URL: ]
+    a(href=leadership, target='_blank') #{titan.company.leadership_page_url}
+  p #[strong Start Date:] #{titan.start_date} #{titan.leadership_page_url}
   - var bb_url = titan.bloomberg_url
   p #[strong Bloomberg URL:]
     a(href=bb_url, target='_blank')  #{titan.bloomberg_url}

@@ -197,7 +197,6 @@ exports.company_update_get = function(req, res, next) {
 
 
 
-    // Get book, authors and genres for form.
     async.parallel({
         company: function(callback) {
             Company.findById(req.params.id).populate('firm').populate('titan').exec(callback);
@@ -263,7 +262,7 @@ exports.company_post_new_titan = function (req, res, next) {
 
     titan.save(function (err) {
         if (err) { return next(err); }
-        //successful - redirect to new book record.
+        // successful - redirect.
         res.redirect(titan.url);
     });
 

@@ -204,24 +204,26 @@ exports.titan_update_get = function (req, res, next) {
 
 
 
-    // Get book, authors and genres for form.
+    // Get Company, authors and genres for form.
     async.parallel({
-        firms: function(callback) {
-            Firm.findById(req.params.id).populate('firm').populate('company').exec(callback);
+        titan: function(callback) {
+            Titan.findById(req.params.id).populate('company').populate('firm').exec(callback);
         },
         companys: function(callback) {
             Company.find(callback);
         },
-
+        firms: function(callback) {
+            Firm.find(callback);
+        },
     }, function(err, results) {
         if (err) { return next(err); }
-        if (results.company==null) { // No results.
+        if (results.titan==null) { // No results.
             var err = new Error('Company not found');
             err.status = 404;
             return next(err);
         }
         // Success.
-        res.render('titan_form', { title: 'Update Titan', firms:results.firms, companys:results.companys });
+        res.render('titan_form', { title: 'Update Titan', company_list :results.companys, firms:results.firm, titan: results.titan  });
     });
 
 };

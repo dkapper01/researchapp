@@ -21,12 +21,12 @@ block content
                             a(href=val.url) #{val.company_name}
                         td
                 else
-                    p This genre has no books.
+                    p This firm has no company.
 
 
     hr
     p
-        a(class='btn btn-warning btn-success')(href=firm.url + '/new_company') Update firm
+        a(class='btn btn-success btn-spacing')(href='/data/company/add') Add Company
 
         a(class='btn btn-warning btn-spacing')(href=firm.url+'/update') Update firm
 
