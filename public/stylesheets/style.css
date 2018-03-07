@@ -3,6 +3,9 @@ a {
     /*hover: #3498db;*/
     /*!* 217dbb 3498db *!*/
 }
+.list-spacing {
+    margin-left: 25px;
+}
 .count_width {
     width: 60px;
 }
