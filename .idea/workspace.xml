@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b924b429-f1ff-4952-ad44-503db7334573" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/javascript/local.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/companyController.js" afterPath="$PROJECT_DIR$/controllers/companyController.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/firmController.js" afterPath="$PROJECT_DIR$/controllers/firmController.js" />
-      <change beforePath="$PROJECT_DIR$/controllers/titanController.js" afterPath="$PROJECT_DIR$/controllers/titanController.js" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change beforePath="$PROJECT_DIR$/views/company_detail.pug" afterPath="$PROJECT_DIR$/views/company_detail.pug" />
       <change beforePath="$PROJECT_DIR$/views/company_form.pug" afterPath="$PROJECT_DIR$/views/company_form.pug" />
-      <change beforePath="$PROJECT_DIR$/views/firm_detail.pug" afterPath="$PROJECT_DIR$/views/firm_detail.pug" />
-      <change beforePath="$PROJECT_DIR$/views/firm_form.pug" afterPath="$PROJECT_DIR$/views/firm_form.pug" />
-      <change beforePath="$PROJECT_DIR$/views/layout.pug" afterPath="$PROJECT_DIR$/views/layout.pug" />
       <change beforePath="$PROJECT_DIR$/views/titan_form.pug" afterPath="$PROJECT_DIR$/views/titan_form.pug" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6222645">
+    <splitter split-orientation="horizontal" split-proportion="0.38725024">
       <split-first>
         <leaf>
           <file leaf-file-name="layout.pug" pinned="false" current-in-tab="false">
@@ -71,23 +60,23 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="company_form.pug" pinned="false" current-in-tab="false">
+          <file leaf-file-name="company_form.pug" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/views/company_form.pug">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="342">
-                  <caret line="27" column="23" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="27" selection-end-column="23" />
+                <state relative-caret-position="174">
+                  <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
                   <folding>
-                    <marker date="1520530006000" expanded="true" signature="1095:1160" ph="..." />
+                    <marker date="1520532167000" expanded="true" signature="1095:1163" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="company_detail.pug" pinned="false" current-in-tab="true">
+          <file leaf-file-name="company_detail.pug" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/views/company_detail.pug">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="60">
-                  <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+                  <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
                   <folding />
                 </state>
               </provider>
@@ -110,8 +99,8 @@
           <file leaf-file-name="titan_form.pug" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/views/titan_form.pug">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="155">
-                  <caret line="11" column="93" lean-forward="true" selection-start-line="11" selection-start-column="93" selection-end-line="11" selection-end-column="93" />
+                <state relative-caret-position="94">
+                  <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
                   <folding />
                 </state>
               </provider>
@@ -228,10 +217,10 @@
         <option value="$PROJECT_DIR$/controllers/firmController.js" />
         <option value="$PROJECT_DIR$/controllers/titanController.js" />
         <option value="$PROJECT_DIR$/controllers/companyController.js" />
-        <option value="$PROJECT_DIR$/views/company_form.pug" />
-        <option value="$PROJECT_DIR$/views/titan_form.pug" />
         <option value="$PROJECT_DIR$/views/firm_detail.pug" />
         <option value="$PROJECT_DIR$/views/company_detail.pug" />
+        <option value="$PROJECT_DIR$/views/titan_form.pug" />
+        <option value="$PROJECT_DIR$/views/company_form.pug" />
       </list>
     </option>
   </component>
@@ -329,7 +318,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122787000" />
+    <option name="totallyTimeSpent" value="123138000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -351,7 +340,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32670453" sideWeight="0.49353796" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.57102275" sideWeight="0.49353796" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15105008" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -511,7 +500,7 @@
         <state relative-caret-position="68">
           <caret line="17" column="163" lean-forward="false" selection-start-line="17" selection-start-column="163" selection-end-line="17" selection-end-column="163" />
           <folding>
-            <marker date="1520530006000" expanded="true" signature="1095:1160" ph="..." />
+            <marker date="1520532167000" expanded="true" signature="1095:1163" ph="..." />
           </folding>
         </state>
       </provider>
@@ -756,24 +745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/titan_form.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="11" column="93" lean-forward="true" selection-start-line="11" selection-start-column="93" selection-end-line="11" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/company_form.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="27" column="23" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="27" selection-end-column="23" />
-          <folding>
-            <marker date="1520530006000" expanded="true" signature="1095:1160" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -798,11 +769,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/titan_form.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/company_detail.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/company_form.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <marker date="1520532167000" expanded="true" signature="1095:1163" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
