@@ -9,17 +9,20 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.firm_list = function(req, res, next) {
 
   Firm.find()
-    .sort([['firm_name', 'descending']])
+    .sort([['firm_name', 'ascending']])
     .exec(function (err, list_firms) {
       if (err) { return next(err); }
       // Successful, so render.
       res.render('firm_list', { title: 'Firm List', list_firms:  list_firms});
     });
+    console.log('cat');
+
 
 };
 
 // Display detail page for a specific Firm.
 exports.firm_detail = function(req, res, next) {
+
 
     async.parallel({
         firm: function(callback) {
@@ -41,6 +44,14 @@ exports.firm_detail = function(req, res, next) {
         // Successful, so render.
         res.render('firm_detail', { title: 'Firm Detail', firm: results.firm, firm_company: results.firm_company } );
     });
+
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        localStorage = new LocalStorage('./scratch');
+    }
+
+    localStorage.setItem('name', 'daniel');
+
 
 };
 

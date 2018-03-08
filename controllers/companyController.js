@@ -27,7 +27,7 @@ exports.index = function(req, res) {
 exports.company_list = function(req, res, next) {
 
     Company.find()
-        .sort([['company_name', 'descending']])
+        .sort([['company_name', 'ascending']])
         .exec(function (err, list_companys) {
             if (err) { return next(err); }
             // Successful, so render.
@@ -60,19 +60,35 @@ exports.company_detail = function(req, res, next) {
         // Successful, so render.
         res.render('company_detail', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
     });
-
 };
 
 // Display company add form on GET.
 exports.company_add_get = function(req, res, next) {
         // res.render('company_form', { title: 'Add Company' });
+    //
+    // Firm.find({},'firm_name')
+    //     .exec(function (err, firms) {
+    //         if (err) { return next(err); }
+    //         // Successful, so render.
+    //         res.render('company_form', {title: 'Add Company', firm_list:firms } );
+    //     });
 
     Firm.find({},'firm_name')
         .exec(function (err, firms) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('company_form', {title: 'Add Company', firm_list:firms } );
+            res.render('company_form', {title: 'Add Company', forms:firms } );
         });
+
+
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        localStorage = new LocalStorage('./scratch');
+    }
+
+    console.log(localStorage.getItem('name'));
+    console.log('cat');
+
 };
 
 // Handle company add on POST.
