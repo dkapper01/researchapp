@@ -17,4 +17,7 @@ block content
             td(class='main_width')
               a(href=firm.url) #{firm.firm_name}
             td
-
+                if firm.status == 'Not Finished'
+                    span.text-danger #{firm.status}
+                if firm.status == "Finished"
+                    span.text-success #{firm.status}

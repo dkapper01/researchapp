@@ -45,14 +45,6 @@ exports.firm_detail = function(req, res, next) {
         res.render('firm_detail', { title: 'Firm Detail', firm: results.firm, firm_company: results.firm_company } );
     });
 
-    if (typeof localStorage === "undefined" || localStorage === null) {
-        var LocalStorage = require('node-localstorage').LocalStorage;
-        localStorage = new LocalStorage('./scratch');
-    }
-
-    localStorage.setItem('name', 'daniel');
-
-
 };
 
 // Display Firm add form on GET.
@@ -75,7 +67,8 @@ exports.firm_add_post = [
     var firm = new Firm(
         {
             firm_name: req.body.firm_name,
-            company: req.body.company
+            company: req.body.company,
+            status: req.body.status
 
         });
 
@@ -194,6 +187,7 @@ exports.firm_update_post = [
         var firm = new Firm(
           {
           firm_name: req.body.firm_name,
+          status: req.body.status,
           _id: req.params.id
           }
         );

@@ -6,6 +6,11 @@ block content
     div.form-group
       label(for='firm_name') Firm:
       input#firm_name.form-control(type='text', placeholder='PE, VE, Stock Leaders.' name='firm_name' required='true' value=(undefined===firm ? '' : firm.firm_name) )
+    div.form-group
+      label(for='status') Status:
+      select#status.form-control(type='select', placeholder='Select status' name='status' required='true' )
+          option(value='Not Finished' selected=(undefined === company || company.status != 'Not Finished' ? false : 'selected')) Not Finished
+          option(value='Finished' selected=(undefined === company || company.status != 'Finished' ? false : 'selected')) Finished
     button.btn.btn-primary(type='submit') Submit
 
   if errors 
