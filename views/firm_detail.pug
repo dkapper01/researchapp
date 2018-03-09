@@ -7,7 +7,7 @@ block content
     h4
       u Firm Information
 
-    p #[strong Status:] 
+    p #[strong Status:]
       if firm.status == 'Not Finished'
           span.text-danger #{firm.status}
       else if firm.status == 'Finished'
@@ -19,7 +19,7 @@ block content
                 tr
                     th #
                     th Portfolio Company
-                    th
+                    th Status
             tbody
                 - var count = 0
                 each val in firm_company
@@ -28,6 +28,11 @@ block content
                         td(class='main_width')
                             a(href=val.url) #{val.company_name}
                         td
+                            if val.status == 'Not Finished'
+                                span.text-danger #{val.status}
+                            if val.status == "Finished"
+                                span.text-success #{val.status}
+
                 else
                     p This firm has no company.
 
