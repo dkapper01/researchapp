@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b924b429-f1ff-4952-ad44-503db7334573" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/views/company_detail.pug" afterPath="$PROJECT_DIR$/views/company_detail.pug" />
-      <change beforePath="$PROJECT_DIR$/views/firm_detail.pug" afterPath="$PROJECT_DIR$/views/firm_detail.pug" />
+      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.40588236">
+    <splitter split-orientation="horizontal" split-proportion="0.16470589">
       <split-first>
         <leaf>
           <file leaf-file-name="company.js" pinned="false" current-in-tab="false">
@@ -74,6 +73,16 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="135">
+                  <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="titan.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/models/titan.js">
               <provider selected="true" editor-type-id="text-editor">
@@ -84,11 +93,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="firm_detail.pug" pinned="false" current-in-tab="true">
+          <file leaf-file-name="firm_detail.pug" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/views/firm_detail.pug">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="64">
-                  <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+                  <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
                   <folding />
                 </state>
               </provider>
@@ -218,7 +227,6 @@
         <option value="$PROJECT_DIR$/views/company_form.pug" />
         <option value="$PROJECT_DIR$/views/firm_form.pug" />
         <option value="$PROJECT_DIR$/controllers/firmController.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/controllers/companyController.js" />
         <option value="$PROJECT_DIR$/views/company_list.pug" />
         <option value="$PROJECT_DIR$/models/company.js" />
@@ -229,6 +237,7 @@
         <option value="$PROJECT_DIR$/views/titan_list.pug" />
         <option value="$PROJECT_DIR$/views/company_detail.pug" />
         <option value="$PROJECT_DIR$/views/firm_detail.pug" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -330,7 +339,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139354000" />
+    <option name="totallyTimeSpent" value="139476000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -702,14 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="27" column="18" lean-forward="false" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2">
@@ -803,7 +804,15 @@
     <entry file="file://$PROJECT_DIR$/views/firm_detail.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
-          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
