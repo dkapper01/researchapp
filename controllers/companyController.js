@@ -107,7 +107,8 @@ exports.company_add_post = [
             company_name: req.body.company_name,
             investment_date: req.body.investment_date,
             leadership_page_url: req.body.leadership_page_url,
-            titanhouse_url: req.body.titanhouse_url
+            titanhouse_url: req.body.titanhouse_url,
+            status: req.body.status
 
         });
 
@@ -142,18 +143,34 @@ Company.findOne({'company_name': req.body.company_name})
 // Display company delete form on GET.
 exports.company_delete_get = function(req, res, next) {
 
+    // async.parallel({
+    //     company: function(callback) {
+    //         Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
+    //     },
+    //
+    // }, function(err, results) {
+    //     if (err) { return next(err); }
+    //     if (results.company==null) { // No results.
+    //         res.redirect('/data/companys');
+    //     }
+    //     // Successful, so render.
+    //     res.render('company_delete', { title: 'Delete Company', company: results.company } );
+    // });
+
     async.parallel({
         company: function(callback) {
             Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
         },
-
+        titan: function(callback) {
+            Titan.find({ 'company': req.params.id }).exec(callback);
+        },
     }, function(err, results) {
         if (err) { return next(err); }
         if (results.company==null) { // No results.
             res.redirect('/data/companys');
         }
         // Successful, so render.
-        res.render('company_delete', { title: 'Delete Company', company: results.company } );
+        res.render('company_delete', { title: 'Delete Company', company: results.company, titan: results.titan } );
     });
 
 };
@@ -161,26 +178,46 @@ exports.company_delete_get = function(req, res, next) {
 // Handle company delete on POST.
 exports.company_delete_post = function(req, res, next) {
 
-    // Assume the post has valid id (ie no validation/sanitization).
+    // async.parallel({
+    //     company: function(callback) {
+    //         Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
+    //     },
+    // }, function(err, results) {
+    //     if (err) { return next(err); }
+    //     // Success
+    //
+    //     else {
+    //         // Company has no CompanyInstance objects. Delete object and redirect to the list of companys.
+    //         Company.findByIdAndRemove(req.body.id, function deleteCompany(err) {
+    //             if (err) { return next(err); }
+    //             // Success - got to companys list.
+    //             res.redirect('/data/companys');
+    //         });
+    //
+    //     }
+    // });
 
-    async.parallel({
-        company: function(callback) {
-            Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
-        },
-    }, function(err, results) {
-        if (err) { return next(err); }
-        // Success
 
-        else {
-            // Company has no CompanyInstance objects. Delete object and redirect to the list of companys.
-            Company.findByIdAndRemove(req.body.id, function deleteCompany(err) {
-                if (err) { return next(err); }
-                // Success - got to companys list.
-                res.redirect('/data/companys');
-            });
-
-        }
-    });
+    // async.parallel({
+    //     company: function(callback) {
+    //         Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
+    //     },
+    //     titan: function(callback) {
+    //         Titan.find({ 'company': req.params.id }).exec(callback);
+    //     },
+    // }, function(err, results) {
+    //     if (err) { return next(err); }
+    //     }
+    //     else {
+    //         // Book has no BookInstance objects. Delete object and redirect to the list of books.
+    //         Company.findByIdAndRemove(req.body.id, function deleteCompany(err) {
+    //             if (err) { return next(err); }
+    //             // Success - got to books list.
+    //             res.redirect('/data/companys');
+    //         });
+    //
+    //     }
+    // });
 
 };
 
@@ -221,6 +258,7 @@ exports.company_update_post = function (req, res, next) {
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
             firm: req.body.firm,
+            status: req.body.status,
             _id: req.params.id // This is required, or a new ID will be assigned!
         });
 

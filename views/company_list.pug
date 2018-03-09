@@ -8,7 +8,7 @@ block content
         //tr
         th #
         th Companies
-        th Executives
+        th Status
       tbody
         - var count = 0
         each company in list_companys
@@ -17,4 +17,11 @@ block content
             td(class='main_width')
               a(href=company.url) #{company.company_name}
             td
+              if company.status == 'Not Finished'
+                span.text-danger #{company.status}
+              if company.status == "Finished"
+                span.text-success #{company.status}
+
+
+
 

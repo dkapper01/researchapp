@@ -15,6 +15,14 @@ block content
     p #[strong Titanhosue URL:]
         a(href=titanhouse, target='_blank')  #{company.titanhouse_url}
 
+    p #[strong Status:]
+        if company.status == 'Not Finished'
+            span.text-danger #{company.status}
+        else if company.status == 'Finished'
+            span.text-success #{company.status}
+
+
+
     .table-responsive
         table.table.table-striped.table-hover.table-bordered.table-margin
             thead
