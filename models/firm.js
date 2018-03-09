@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var Firm = require('../models/firm');
 var Company = require('../models/company');
+var timestamps = require('mongoose-timestamp');
+
 
 var Schema = mongoose.Schema;
 
@@ -19,6 +21,7 @@ FirmSchema
 });
 
 // Export model.
+FirmSchema.plugin(timestamps);
 
 module.exports = mongoose.model('Firm', FirmSchema);
 

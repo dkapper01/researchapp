@@ -80,15 +80,6 @@ exports.company_add_get = function(req, res, next) {
             res.render('company_form', {title: 'Add Company', forms:firms } );
         });
 
-
-    if (typeof localStorage === "undefined" || localStorage === null) {
-        var LocalStorage = require('node-localstorage').LocalStorage;
-        localStorage = new LocalStorage('./scratch');
-    }
-
-    console.log(localStorage.getItem('name'));
-    console.log('cat');
-
 };
 
 // Handle company add on POST.
@@ -109,7 +100,6 @@ exports.company_add_post = [
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
             status: req.body.status
-
         });
 
 

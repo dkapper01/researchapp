@@ -9,6 +9,7 @@ block content
         th #
         th Companies
         th Status
+        th Crated At
       tbody
         - var count = 0
         each company in list_companys
@@ -21,6 +22,7 @@ block content
                 span.text-danger #{company.status}
               if company.status == "Finished"
                 span.text-success #{company.status}
+            td #{company.createdAt}
 
 
 

@@ -8,7 +8,7 @@ block content
         //tr
         th #
         th Titan
-        th
+        th Created At
       tbody
         - var count = 0
         each titan in titan_lists
@@ -16,5 +16,5 @@ block content
             td(class='count_width') #{++count}
             td(class='main_width')
               a(href=titan.url) #{titan.titan_name}
-            td
+            td #{titan.createdAt}
 

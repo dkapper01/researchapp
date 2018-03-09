@@ -9,6 +9,7 @@ block content
         th #
         th Firms
         th Status
+        th Created At
       tbody
         - var count = 0
         each firm in list_firms
@@ -21,3 +22,4 @@ block content
                     span.text-danger #{firm.status}
                 if firm.status == "Finished"
                     span.text-success #{firm.status}
+            td #{firm.createdAt}

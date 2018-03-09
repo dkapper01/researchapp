@@ -20,6 +20,7 @@ block content
                     th #
                     th Portfolio Company
                     th Status
+                    th Created At
             tbody
                 - var count = 0
                 each val in firm_company
@@ -32,7 +33,7 @@ block content
                                 span.text-danger #{val.status}
                             if val.status == "Finished"
                                 span.text-success #{val.status}
-
+                        td #{val.createdAt}
                 else
                     p This firm has no company.
 

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Firm = require('../models/firm');
 var Company = require('../models/company');
 var moment = require('moment'); // For date handling.
+var timestamps = require('mongoose-timestamp');
 
 var Schema = mongoose.Schema;
 
@@ -28,5 +29,6 @@ TitanSchema
   return moment(this.start_date).format('MMM Do YY');
 });
 
+TitanSchema.plugin(timestamps);
 // Export model.
 module.exports = mongoose.model('Titan', TitanSchema);
