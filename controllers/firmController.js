@@ -1,5 +1,6 @@
 var Firm = require('../models/firm');
 var Company = require('../models/company');
+var LocalStorage = require('node-localstorage').LocalStorage;
 var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
@@ -9,7 +10,7 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.firm_list = function(req, res, next) {
 
   Firm.find()
-    .sort([['firm_name', 'ascending']])
+    .sort([['firm_name', 'descending']])
     .exec(function (err, list_firms) {
       if (err) { return next(err); }
       // Successful, so render.

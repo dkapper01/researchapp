@@ -1,13 +1,15 @@
 extends layout
 
 
+
 block content
+
     h1 #{firm.firm_name}
     h4(class='text-success') #{firm._id}
     h4
       u Firm Information
 
-    p #[strong Status:]git
+    p #[strong Status:]
       if firm.status == 'Not Finished'
           span.text-danger #{firm.status}
       else if firm.status == 'Finished'
@@ -40,7 +42,7 @@ block content
 
     hr
     p
-        a(class='btn btn-success btn-spacing')(href='/data/company/add') Add Company
+        a(class='btn btn-success btn-spacing')(href='/data/company/add')(data-json=' { "firmID": #{firm._id}, "data": true } ') Add Company
 
         a(class='btn btn-warning btn-spacing')(href=firm.url+'/update') Update firm
 

@@ -27,8 +27,9 @@ CompanySchema
 CompanySchema
 .virtual('investment_date_yyyy_mm_dd')
 .get(function () {
-    return moment(this.investment_date).format('MMM Do YY');
+    return moment(this.investment_date).format('MMMM Do YYYY');
 });
+
 
 // Export model.
 CompanySchema.plugin(timestamps);

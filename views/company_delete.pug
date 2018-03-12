@@ -1,33 +1,39 @@
 extends layout
 
 block content
+    h1 #{company.company_name}
 
-  h1 #{company.company_name}
-    h4
-      u Portfolio Company Information
+    if company_titan.length
+        p You must delete the following Titans before you can delete this company.
+        .table-responsive
+            table.table.table-striped.table-hover.table-bordered.table-margin
+                thead
+                    tr
+                        th #
+                        th Titan
+                        th
+                tbody
+                    - var count = 0
+                    each val in company_titan
+                        tr
+                            td(class='count_width') #{++count}
+                            td(class='main_width')
+                                a(href=val.url) #{val.titan_name}
+                            td #{val.createdAt}
+                    else
+                        p This company has no titans.
+    else
+        p Do you really want to delete this Company?
 
-  p #[strong Investment date:] #{company.investment_date}
-  p #[strong Bloomberg URL:] #{company.leadership_page_url}
-  p #[strong Titanhouse URL:] #{company.titanhouse_url}
+        form(method='POST' action='')
+            div.form-group
+                input#companyid.form-control(type='hidden',name='companyid', required='true', value=company._id )
 
-  // - var count = 0
-  // each val in company_titan
-  //     tr
-  //         td(class='count_width') #{++count}
-  //         td(class='main_width')
-  //             a(href=val.url) #{val.titan_name}
-  //         td
-  hr
-  
-
-  p #[strong Delete the following copies before attempting to delete this Company.]
+            button.btn.btn-danger(type='submit') Delete
 
 
 
-  p Do you really want to delete this Company?
-    
-  form(method='POST' action='')
-    div.form-group
-      input#id.form-control(type='hidden',name='id', required='true', value=company._id )
 
-  button.btn.btn-primary(type='submit') Delete
+
+
+

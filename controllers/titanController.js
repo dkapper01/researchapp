@@ -10,7 +10,7 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.titan_list = function (req, res, next) {
 
     Titan.find()
-        .sort([['titan_name', 'ascending']])
+        .sort([['titan_name', 'descending']])
         .exec(function (err, list_titans) {
             if (err) { return next(err); }
             // Successful, so render.

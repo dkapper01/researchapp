@@ -27,7 +27,7 @@ exports.index = function(req, res) {
 exports.company_list = function(req, res, next) {
 
     Company.find()
-        .sort([['company_name', 'ascending']])
+        .sort([['company_name', 'descending']])
         .exec(function (err, list_companys) {
             if (err) { return next(err); }
             // Successful, so render.
@@ -133,81 +133,59 @@ Company.findOne({'company_name': req.body.company_name})
 // Display company delete form on GET.
 exports.company_delete_get = function(req, res, next) {
 
-    // async.parallel({
-    //     company: function(callback) {
-    //         Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
-    //     },
-    //
-    // }, function(err, results) {
-    //     if (err) { return next(err); }
-    //     if (results.company==null) { // No results.
-    //         res.redirect('/data/companys');
-    //     }
-    //     // Successful, so render.
-    //     res.render('company_delete', { title: 'Delete Company', company: results.company } );
-    // });
-
     async.parallel({
         company: function(callback) {
-            Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
+            Company.findById(req.params.id)
+                .populate('firm')
+                .exec(callback);
         },
-        titan: function(callback) {
-            Titan.find({ 'company': req.params.id }).exec(callback);
+        company_titan: function(callback) {
+            Titan.find({ 'company': req.params.id })
+                .exec(callback);
         },
+
     }, function(err, results) {
         if (err) { return next(err); }
         if (results.company==null) { // No results.
-            res.redirect('/data/companys');
+            var err = new Error('Company not found');
+            err.status = 404;
+            return next(err);
         }
         // Successful, so render.
-        res.render('company_delete', { title: 'Delete Company', company: results.company, titan: results.titan } );
+        res.render('company_delete', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
     });
+
 
 };
 
 // Handle company delete on POST.
 exports.company_delete_post = function(req, res, next) {
 
-    // async.parallel({
-    //     company: function(callback) {
-    //         Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
-    //     },
-    // }, function(err, results) {
-    //     if (err) { return next(err); }
-    //     // Success
-    //
-    //     else {
-    //         // Company has no CompanyInstance objects. Delete object and redirect to the list of companys.
-    //         Company.findByIdAndRemove(req.body.id, function deleteCompany(err) {
-    //             if (err) { return next(err); }
-    //             // Success - got to companys list.
-    //             res.redirect('/data/companys');
-    //         });
-    //
-    //     }
-    // });
+    async.parallel({
+        company: function (callback) {
+            Company.findById(req.body.companyid).exec(callback)
+        },
+        company_titan: function (callback) {
+            Titan.find({ 'company': req.body.companyid }).exec(callback)
+        },
+    }, function (err, results) {
+        if (err) { return next(err); }
+        // Success.
+        if (results.company_titan.length > 0) {
+            // Company has books. Render in same way as for GET route.
+            res.render('company_delete', { title: 'Delete Company', company: results.company, company_titan: results.company_titan });
+            return;
+        }
+        else {
+            // Company has no books. Delete object and redirect to the list of companys.
+            Company.findByIdAndRemove(req.body.companyid, function deleteCompany(err) {
+                if (err) { return next(err); }
+                // Success - go to company list.
+                res.redirect('/data/companys')
+            })
 
-
-    // async.parallel({
-    //     company: function(callback) {
-    //         Company.findById(req.params.id).populate('titan').populate('firm').exec(callback);
-    //     },
-    //     titan: function(callback) {
-    //         Titan.find({ 'company': req.params.id }).exec(callback);
-    //     },
-    // }, function(err, results) {
-    //     if (err) { return next(err); }
-    //     }
-    //     else {
-    //         // Book has no BookInstance objects. Delete object and redirect to the list of books.
-    //         Company.findByIdAndRemove(req.body.id, function deleteCompany(err) {
-    //             if (err) { return next(err); }
-    //             // Success - got to books list.
-    //             res.redirect('/data/companys');
-    //         });
-    //
-    //     }
-    // });
+        }
+    });
 
 };
 
@@ -223,7 +201,7 @@ exports.company_update_get = function(req, res, next) {
             Firm.find(callback);
         },
         titans: function(callback) {
-            Titan.find(callback);
+            Titan.find(callback);s
         },
     }, function(err, results) {
         if (err) { return next(err); }

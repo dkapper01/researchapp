@@ -9,7 +9,7 @@ block content
       input#titan_name.form-control(type='text', placeholder='' name='titan_name' required='true' value=(undefined===titan ? '' : titan.titan_name) )
     div.form-group
       label(for='start_date') Start Date:
-      input#start_date.form-control(type='date', name='start_date' value=(undefined === titan ? '' : titan.start_date_yyyy_mm_dd) )
+      input#start_date.form-control(type='date', name='start_date' required='true' value=(undefined === titan ? '' : titan.start_date_yyyy_mm_dd) )
     div.form-group
       label(for='bloomberg_url') Bloomberg URL:
       input#bloomberg_url.form-control(type='text', placeholder='' name='bloomberg_url' value=(undefined===titan ? '' : titan.bloomberg_url))
@@ -18,7 +18,7 @@ block content
       input#linkedin_url.form-control(type='text', placeholder='' name='linkedin_url' value=(undefined === titan ? '' : titan.linkedin_url))
     div.form-group
       label(for='company') Company ID:
-      input#company.form-control(type='text', placeholder='' name='company' value=(undefined === titan ? '' : company))
+      input#company.form-control(type='text', placeholder='' name='company' required='true' value=(undefined === titan ? '' : company))
     button.btn.btn-primary(type='submit') Submit
 
   if errors
