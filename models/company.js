@@ -8,12 +8,12 @@ var Schema = mongoose.Schema;
 var CompanySchema = new Schema({
 
     company_name: {type: String, required: true},
-    investment_date: { type: Date },
     leadership_page_url: {type: String},
     titanhouse_url: {type: String},
     status: {type: String, required: true, enum:['Finished', 'Not Finished'], default:'Not Finished'},
     titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }],
     firm: { type: Schema.ObjectId, ref: 'Firm', required: true },
+    investment_date: { type: Date }
 });
 
 // Virtual for this company instance URL.
@@ -27,7 +27,7 @@ CompanySchema
 CompanySchema
 .virtual('investment_date_yyyy_mm_dd')
 .get(function () {
-    return moment(this.investment_date).format('MMMM Do YYYY');
+    return moment(this.investment_date).format('YYYY-MM-DD');
 });
 
 

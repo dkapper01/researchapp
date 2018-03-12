@@ -26,7 +26,7 @@ TitanSchema
 TitanSchema
 .virtual('start_date_yyyy_mm_dd')
 .get(function () {
-  return moment(this.start_date).format('MMM Do YY');
+  return moment(this.start_date).format('YYYY-MM-DD');
 });
 
 TitanSchema.plugin(timestamps);

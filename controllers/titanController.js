@@ -188,42 +188,24 @@ exports.titan_delete_post = function (req, res, next) {
 
 // Display Titan update form on GET.
 exports.titan_update_get = function (req, res, next) {
-    //
-    // Titan.findById(req.params.id, function (err, titan) {
-    //     if (err) { return next(err); }
-    //     if (titan == null) { // No results.
-    //         var err = new Error('Titan not found');
-    //         err.status = 404;
-    //         return next(err);
-    //     }
-    //     // Success.
-    //     res.render('titan_form', { title: 'Update Titan', titan: titan });
-    //
-    // });
-    //
 
-
-
-    // Get Company, authors and genres for form.
     async.parallel({
         titan: function(callback) {
-            Titan.findById(req.params.id).populate('company').populate('firm').exec(callback);
+            Titan.findById(req.params.id).populate('company').exec(callback)
         },
-        companys: function(callback) {
-            Company.find(callback);
+        company: function(callback) {
+            Company.find(callback)
         },
-        firms: function(callback) {
-            Firm.find(callback);
-        },
+
     }, function(err, results) {
         if (err) { return next(err); }
-        if (results.titan==null) { // No results.
-            var err = new Error('Company not found');
+        if (results.company==null) { // No results.
+            var err = new Error('Titan not found');
             err.status = 404;
             return next(err);
         }
         // Success.
-        res.render('titan_form', { title: 'Update Titan', company_list :results.companys, firms:results.firm, titan: results.titan  });
+        res.render('titan_form', { title: 'Update  Titan', company_list : results.company, titan:results.titan });
     });
 
 };

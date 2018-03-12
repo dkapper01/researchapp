@@ -96,9 +96,9 @@ exports.company_add_post = [
         {
             firm: req.body.firm,
             company_name: req.body.company_name,
-            investment_date: req.body.investment_date,
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
+            investment_date: req.body.investment_date,
             status: req.body.status
         });
 
@@ -192,17 +192,14 @@ exports.company_delete_post = function(req, res, next) {
 // Display company update form on GET.
 exports.company_update_get = function(req, res, next) {
 
-
     async.parallel({
         company: function(callback) {
-            Company.findById(req.params.id).populate('firm').populate('titan').exec(callback);
+            Company.findById(req.params.id).populate('firm').exec(callback)
         },
-        firms: function(callback) {
-            Firm.find(callback);
+        firm: function(callback) {
+            Firm.find(callback)
         },
-        titans: function(callback) {
-            Titan.find(callback);
-        },
+
     }, function(err, results) {
         if (err) { return next(err); }
         if (results.company==null) { // No results.
@@ -210,7 +207,8 @@ exports.company_update_get = function(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        res.render('company_form', { title: 'Update Company', firm_list : results.firms, titans:results.titans, company: results.company });
+        // Success.
+        res.render('company_form', { title: 'Update  Company', firm_list : results.firm, company:results.company });
     });
 
 };
@@ -222,11 +220,11 @@ exports.company_update_post = function (req, res, next) {
     var company = new Company(
         {
             company_name: req.body.company_name,
-            investment_date: req.body.investment_date,
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
             firm: req.body.firm,
             status: req.body.status,
+            investment_date: req.body.investment_date,
             _id: req.params.id // This is required, or a new ID will be assigned!
         });
 
