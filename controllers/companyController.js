@@ -201,7 +201,7 @@ exports.company_update_get = function(req, res, next) {
             Firm.find(callback);
         },
         titans: function(callback) {
-            Titan.find(callback);s
+            Titan.find(callback);
         },
     }, function(err, results) {
         if (err) { return next(err); }
