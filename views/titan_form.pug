@@ -19,6 +19,12 @@ block content
     div.form-group
       label(for='company') Company ID:
       input#company.form-control(type='text', placeholder='' name='company' required='true' value=(undefined === titan ? '' : titan.company.id))
+    div.form-group
+      label(for='freelancer') Freelancer:
+      select#freelancer.form-control(type='select', placeholder='Select Freelancer' name='freelancer' required='true' )
+        option(value='Not Assigned' selected=(undefined === titan || titan.freelancer != 'Not Assigned' ? false : 'selected')) Not Assigned
+        option(value='Steve Friedman' selected=(undefined === titan || titan.freelancer != 'Steve Friedman' ? false : 'selected')) Steve Friedman
+        option(value='Hector Echavarria' selected=(undefined === titan || titan.freelancer != 'Hector Echavarria' ? false : 'selected')) Hector Echavarria
     button.btn.btn-primary(type='submit') Submit
 
   if errors

@@ -12,7 +12,9 @@ var TitanSchema = new Schema(
         start_date: { type: Date },
         bloomberg_url: {type: String},
         linkedin_url: {type: String},
-        company: { type: Schema.ObjectId, ref: 'Company', required: true }
+        company: { type: Schema.ObjectId, ref: 'Company', required: true },
+        freelancer: {type: String, required: true, enum:['Not Assigned', 'Steve Friedman', 'Hector Echavarria'], default:'Not Finished'}
+
     }
   );
 

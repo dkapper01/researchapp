@@ -23,6 +23,13 @@ block content
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
   p #[strong Created At:] #{titan.createdAt}
 
+  p #[strong Assigned To: ]
+    if titan.freelancer == 'Not Assigned'
+        span.text-danger #{titan.freelancer}
+    else if titan.freelancer == 'Steve Friedman'
+        span.text-success #{titan.freelancer}
+    else if titan.freelancer == 'Hector Echavarria'
+        span.text-success #{titan.freelancer}
 
   hr
   p
