@@ -18,7 +18,7 @@ block content
         a(href=titanhouse, target='_blank')  #{company.titanhouse_url}
     p #[strong Created At:]  #{company.createdAt}
 
-    p #[strong Status:]
+    p #[strong Status: ]
         if company.status == 'Not Finished'
             span.text-danger #{company.status}
         else if company.status == 'Finished'

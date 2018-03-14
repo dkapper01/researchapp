@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var passport = require("passport");
+var LocalStrategy = require('passport-local');
 
 
 // Require our controllers.
@@ -8,7 +10,7 @@ var titan_controller = require('../controllers/titanController');
 var firm_controller = require('../controllers/firmController');
 
 
-/// COMPANY ROUTES ///
+// COMPANY ROUTES ///
 
 // GET data home page.
 router.get('/', company_controller.index);
@@ -17,7 +19,7 @@ router.get('/', company_controller.index);
 router.get('/company/add', company_controller.company_add_get);
 
 // POST request for creating Company.
-router.post('/company/add', company_controller.company_add_post);
+router.post('/company/add/', company_controller.company_add_post);
 
 // GET request to delete Company.
 router.get('/company/:id/delete', company_controller.company_delete_get);
@@ -97,13 +99,12 @@ router.get('/firm/:id', firm_controller.firm_detail);
 router.get('/firms', firm_controller.firm_list);
 
 
-router.get('/firm/:id/new_company', firm_controller.new_company_get);
-
-router.post('/firm/:id/new_company', firm_controller.company_add_get);
-
-
-// GET request for one Firm.
-// router.get('/firm/:id', firm_controller.firm_detail);
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 
 module.exports = router;

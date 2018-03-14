@@ -6,6 +6,7 @@ block content
 
   h1 Dynamic content
 
+
   if error
     p Error getting dynamic content.
   else
@@ -13,6 +14,6 @@ block content
     p The research app has the following record counts:
 
     ul
+      li #[strong Firms:] !{data.firm_count}
       li #[strong Companys:] !{data.company_count}
       li #[strong Titans:] !{data.titan_count}
-      li #[strong Firms:] !{data.firm_count}

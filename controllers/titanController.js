@@ -1,7 +1,9 @@
-var Titan = require('../models/titan')
+var Titan = require('../models/titan');
 var Firm = require('../models/firm');
-var async = require('async')
-var Company = require('../models/company')
+var User = require('../models/user');
+var Company = require('../models/company');
+var async = require('async');
+
 
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');

@@ -9,7 +9,7 @@ block content
     h4
       u Firm Information
 
-    p #[strong Status:]
+    p #[strong Status: ]
       if firm.status == 'Not Finished'
           span.text-danger #{firm.status}
       else if firm.status == 'Finished'
@@ -38,11 +38,16 @@ block content
                         td #{val.createdAt}
                 else
                     p This firm has no company.
+    select
+        option(value='volvo') Volvo
+        option(value='saab') Saab
+        option(value='mercedes') Mercedes
+        option(value='audi') Audi
 
 
     hr
     p
-        a(class='btn btn-success btn-spacing')(href='/data/company/add')(data-json=' { "firmID": #{firm._id}, "data": true } ') Add Company
+        a(class='btn btn-success btn-spacing')(href='/data/company/add') Add Company
 
         a(class='btn btn-warning btn-spacing')(href=firm.url+'/update') Update firm
 

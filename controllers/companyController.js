@@ -1,7 +1,16 @@
 var Company = require('../models/company');
 var Titan = require('../models/titan');
 var Firm = require('../models/firm');
+var User = require('../models/user');
 var async = require('async');
+var passport = require("passport");
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -31,9 +40,9 @@ exports.company_list = function(req, res, next) {
         .exec(function (err, list_companys) {
             if (err) { return next(err); }
             // Successful, so render.
+            console.log('Company List Here');
             res.render('company_list', { title: 'Company List', list_companys:  list_companys});
         });
-
 };
 
 // Display detail page for a specific company.

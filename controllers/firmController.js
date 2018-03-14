@@ -1,6 +1,6 @@
 var Firm = require('../models/firm');
 var Company = require('../models/company');
-var LocalStorage = require('node-localstorage').LocalStorage;
+var User = require('../models/company');
 var async = require('async');
 
 const { body,validationResult } = require('express-validator/check');
