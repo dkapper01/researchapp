@@ -103,7 +103,8 @@ exports.titan_add_post = [
             start_date: req.body.start_date,
             bloomberg_url: req.body.bloomberg_url,
             linkedin_url: req.body.linkedin_url,
-            freelancer: req.body.freelancer
+            freelancer: req.body.freelancer,
+            profile_status: req.body.profile_status
         });
 
 
@@ -234,6 +235,7 @@ exports.titan_update_post = [
             bloomberg_url: req.body.bloomberg_url,
             linkedin_url: req.body.linkedin_url,
             freelancer: req.body.freelancer,
+            profile_status: req.body.profile_status,
             _id: req.params.id
         }
     );

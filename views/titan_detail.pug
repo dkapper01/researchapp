@@ -29,7 +29,16 @@ block content
     else if titan.freelancer == 'Steve Friedman'
         span.text-success #{titan.freelancer}
     else if titan.freelancer == 'Hector Echavarria'
-        span.text-success #{titan.freelancer}
+        span.text-info #{titan.freelancer}
+
+  p #[strong Profile Status: ]
+    if titan.profile_status == 'In Progress'
+        span.text-warning #{titan.profile_status}
+    else if titan.profile_status == 'Invalid'
+        span.text-danger #{titan.profile_status}
+    else if titan.profile_status == 'Complete'
+        span.text-success #{titan.profile_status}
+    //eles if
 
   hr
   p

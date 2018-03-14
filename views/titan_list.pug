@@ -10,6 +10,7 @@ block content
         th Titan
         th Created At
         th Assigned To
+        th Profile Status
       tbody
         - var count = 0
         each titan in titan_lists
@@ -24,8 +25,14 @@ block content
               else if titan.freelancer == 'Steve Friedman'
                 span.text-success #{titan.freelancer}
               else if titan.freelancer == 'Hector Echavarria'
-                span.text-success #{titan.freelancer}
-
+                span.text-info #{titan.freelancer}
+            td
+              if titan.profile_status == 'In Progress'
+                span.text-warning #{titan.profile_status}
+              else if titan.profile_status == 'Invalid'
+                span.text-danger #{titan.profile_status}
+              else if titan.profile_status == 'Complete'
+                span.text-success #{titan.profile_status}
   nav(aria-label='Page navigation')
     ul.pagination
       li

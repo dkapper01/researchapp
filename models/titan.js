@@ -13,8 +13,8 @@ var TitanSchema = new Schema(
         bloomberg_url: {type: String},
         linkedin_url: {type: String},
         company: { type: Schema.ObjectId, ref: 'Company', required: true },
-        freelancer: {type: String, required: true, enum:['Not Assigned', 'Steve Friedman', 'Hector Echavarria'], default:'Not Finished'}
-
+        freelancer: {type: String, required: true, enum:['Not Assigned', 'Steve Friedman', 'Hector Echavarria'], default:'Not Assigned'},
+        profile_status: {type: String, required: true, enum:['In Progress', 'Invalid', 'Complete'], default: 'In Progress'}
     }
   );
 
