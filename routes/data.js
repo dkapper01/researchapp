@@ -13,90 +13,91 @@ var firm_controller = require('../controllers/firmController');
 // COMPANY ROUTES ///
 
 // GET data home page.
-router.get('/', company_controller.index);
+router.get('/', isLoggedIn, company_controller.index);
 
 // GET request for creating a Company. NOTE This must come before routes that display Company (uses id).
-router.get('/company/add', company_controller.company_add_get);
+router.get('/company/add', isLoggedIn, company_controller.company_add_get);
 
 // POST request for creating Company.
-router.post('/company/add/', company_controller.company_add_post);
+router.post('/company/add/', isLoggedIn, company_controller.company_add_post);
 
 // GET request to delete Company.
-router.get('/company/:id/delete', company_controller.company_delete_get);
+router.get('/company/:id/delete', isLoggedIn, company_controller.company_delete_get);
 
 // POST request to delete Company.
-router.post('/company/:id/delete', company_controller.company_delete_post);
+router.post('/company/:id/delete', isLoggedIn, company_controller.company_delete_post);
 
 // GET request to update Company.
-router.get('/company/:id/update', company_controller.company_update_get);
+
+router.get('/company/:id/update', isLoggedIn, company_controller.company_update_get);
 
 // POST request to update Company.
-router.post('/company/:id/update', company_controller.company_update_post);
+router.post('/company/:id/update', isLoggedIn, company_controller.company_update_post);
 
 // GET request for one Company.
-router.get('/company/:id', company_controller.company_detail);
+router.get('/company/:id', isLoggedIn, company_controller.company_detail);
 
 // GET request for list of all Company.
-router.get('/companys', company_controller.company_list);
+router.get('/companys', isLoggedIn, company_controller.company_list);
 
 // GET request for new titan
-router.get('/company/:id/company_get_new_titan', company_controller.company_get_new_titan);
-
-router.post('/company/:id/company_post_new_titan', company_controller.company_post_new_titan);
+// router.get('/company/:id/company_get_new_titan', company_controller.company_get_new_titan);
+//
+// router.post('/company/:id/company_post_new_titan', company_controller.company_post_new_titan);
 
 
 /// TITAN ROUTES ///
 
 // GET request for creating Titan. NOTE This must come before route for id (i.e. display titan).
-router.get('/titan/add', titan_controller.titan_add_get);
+router.get('/titan/add', isLoggedIn, titan_controller.titan_add_get);
 
 // POST request for creating Titan.
-router.post('/titan/add', titan_controller.titan_add_post);
+router.post('/titan/add', isLoggedIn, titan_controller.titan_add_post);
 
 // GET request to delete Titan.
-router.get('/titan/:id/delete', titan_controller.titan_delete_get);
+router.get('/titan/:id/delete', isLoggedIn, titan_controller.titan_delete_get);
 
 // POST request to delete Titan
-router.post('/titan/:id/delete', titan_controller.titan_delete_post);
+router.post('/titan/:id/delete', isLoggedIn, titan_controller.titan_delete_post);
 
 // GET request to update Titan.
-router.get('/titan/:id/update', titan_controller.titan_update_get);
+router.get('/titan/:id/update', isLoggedIn, titan_controller.titan_update_get);
 
 // POST request to update Titan.
-router.post('/titan/:id/update', titan_controller.titan_update_post);
+router.post('/titan/:id/update', isLoggedIn, titan_controller.titan_update_post);
 
 // GET request for one Titan.
-router.get('/titan/:id', titan_controller.titan_detail);
+router.get('/titan/:id', isLoggedIn, titan_controller.titan_detail);
 
 // GET request for list of all Titans.
-router.get('/titans', titan_controller.titan_list);
+router.get('/titans', isLoggedIn, titan_controller.titan_list);
 
 
 /// FIRM ROUTES ///
 
 // GET request for creating a Firm. NOTE This must come before route that displays Firm (uses id).
-router.get('/firm/add', firm_controller.firm_add_get);
+router.get('/firm/add', isLoggedIn, firm_controller.firm_add_get);
 
 // POST request for creating Firm.
-router.post('/firm/add', firm_controller.firm_add_post);
+router.post('/firm/add', isLoggedIn, firm_controller.firm_add_post);
 
 // GET request to delete Firm.
-router.get('/firm/:id/delete', firm_controller.firm_delete_get);
+router.get('/firm/:id/delete', isLoggedIn, firm_controller.firm_delete_get);
 
 // POST request to delete Firm.
-router.post('/firm/:id/delete', firm_controller.firm_delete_post);
+router.post('/firm/:id/delete', isLoggedIn, firm_controller.firm_delete_post);
 
 // GET request to update Firm.
-router.get('/firm/:id/update', firm_controller.firm_update_get);
+router.get('/firm/:id/update', isLoggedIn, firm_controller.firm_update_get);
 
 // POST request to update Firm.
-router.post('/firm/:id/update', firm_controller.firm_update_post);
+router.post('/firm/:id/update', isLoggedIn, firm_controller.firm_update_post);
 
 // GET request for one Firm.
-router.get('/firm/:id', firm_controller.firm_detail);
+router.get('/firm/:id', isLoggedIn, firm_controller.firm_detail);
 
 // GET request for list of all Firm.
-router.get('/firms', firm_controller.firm_list);
+router.get('/firms', isLoggedIn, firm_controller.firm_list);
 
 
 function isLoggedIn(req, res, next) {
