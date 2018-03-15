@@ -27,7 +27,7 @@ CompanySchema
 CompanySchema
 .virtual('created_at_yyyy_mm_dd')
 .get(function () {
-    return moment(this.createdAt).format('llll')
+    return moment(this.createdAt).format('l')
 });
 
 CompanySchema

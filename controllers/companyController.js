@@ -36,7 +36,7 @@ exports.index = function(req, res) {
 exports.company_list = function(req, res, next) {
 
     Company.find()
-        .sort([['createdAt', 'descending']])
+        .sort([['status', 'descending']])
         .exec(function (err, list_companys) {
             if (err) { return next(err); }
             // Successful, so render.
