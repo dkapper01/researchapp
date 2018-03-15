@@ -16,9 +16,8 @@ exports.titan_list = function (req, res, next) {
         .exec(function (err, list_titans) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('titan_list', { title: 'Titan List', titan_lists: list_titans });
-        })
-
+            res.render('titan_list', { title: 'Titan List', titan_lists: list_titans, currentUser: req.user });
+        });
 };
 
 // Display detail page for a specific Titan.
@@ -47,7 +46,7 @@ exports.titan_detail = function (req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys });
+        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys, currentUser: req.user });
     });
 
 };
