@@ -22,7 +22,7 @@ block content
                     span.text-danger #{firm.status}
                 if firm.status == "Finished"
                     span.text-success #{firm.status}
-            td #{firm.createdAt}
+            td #{firm.created_at_yyyy_mm_dd}
 
   nav(aria-label='Page navigation')
       ul.pagination

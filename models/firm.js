@@ -1,15 +1,16 @@
 var mongoose = require('mongoose');
 var Firm = require('../models/firm');
 var Company = require('../models/company');
-var timestamps = require('mongoose-timestamp');
+var moment = require('moment'); // For date handling.
 
 
 var Schema = mongoose.Schema;
 
 var FirmSchema = new Schema({
+    createdAt: { type: Date, default: Date.now() },
     firm_name: {type: String, required: true, min: 3, max: 100},
     company: [{ type: Schema.ObjectId, ref: 'Company', required: true }],
-    status: {type: String, required: true, enum:['Finished', 'Not Finished'], default:'Not Finished'}
+    status: { type: String, enum:['Finished', 'Not Finished'], default:'Not Finished' }
 });
 
 
@@ -20,8 +21,12 @@ FirmSchema
   return '/data/firm/'+this._id;
 });
 
-// Export model.
-FirmSchema.plugin(timestamps);
+
+FirmSchema
+.virtual('created_at_yyyy_mm_dd')
+.get(function () {
+    return moment(this.createdAt).format('llll')
+});
 
 module.exports = mongoose.model('Firm', FirmSchema);
 

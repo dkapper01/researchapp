@@ -36,7 +36,7 @@ exports.index = function(req, res) {
 exports.company_list = function(req, res, next) {
 
     Company.find()
-        .sort([['company_name', 'descending']])
+        .sort([['createdAt', 'descending']])
         .exec(function (err, list_companys) {
             if (err) { return next(err); }
             // Successful, so render.
@@ -108,6 +108,7 @@ exports.company_add_post = [
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
             investment_date: req.body.investment_date,
+            createdAt: req.body.createdAt,
             status: req.body.status
         });
 
@@ -234,6 +235,7 @@ exports.company_update_post = function (req, res, next) {
             firm: req.body.firm,
             status: req.body.status,
             investment_date: req.body.investment_date,
+            createdAt: req.body.createdAt,
             _id: req.params.id // This is required, or a new ID will be assigned!
         });
 
@@ -246,29 +248,4 @@ exports.company_update_post = function (req, res, next) {
 };
 
 
-
-exports.company_get_new_titan = function (req, res, next) {
-    res.render('titan_form', { title: 'New Titan' });
-
-};
-
-exports.company_post_new_titan = function (req, res, next) {
-
-    var TitanSchema = new Schema(
-        {
-            titan_name: {type: String, required: true, max: 100},
-            start_date: { type: Date },
-            bloomberg_url: {type: String},
-            linkedin_url: {type: String},
-            // company: { type: Schema.ObjectId, ref: 'Company', required: true }
-        }
-    );
-
-    titan.save(function (err) {
-        if (err) { return next(err); }
-        // successful - redirect.
-        res.redirect(titan.url);
-    });
-
-};
 

@@ -16,7 +16,7 @@ block content
         - var titanhouse = company.titanhouse_url
     p #[strong Titanhouse URL: ]
         a(href=titanhouse, target='_blank')  #{company.titanhouse_url}
-    p #[strong Created At:]  #{company.createdAt}
+    p #[strong Created At:]  #{company.created_at_yyyy_mm_dd}
 
     p #[strong Status: ]
         if company.status == 'Not Finished'

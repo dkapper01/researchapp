@@ -8,7 +8,7 @@ block content
     h4(class='text-success') #{firm._id}
     h4
       u Firm Information
-
+    p #[strong CreatedAt: ] #{firm.created_at_yyyy_mm_dd}
     p #[strong Status: ]
       if firm.status == 'Not Finished'
           span.text-danger #{firm.status}
@@ -35,7 +35,7 @@ block content
                                 span.text-danger #{val.status}
                             if val.status == "Finished"
                                 span.text-success #{val.status}
-                        td #{val.createdAt}
+                        td #{val.created_at_yyyy_mm_dd}
                 else
                     p This firm has no company.
 

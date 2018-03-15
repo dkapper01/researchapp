@@ -21,7 +21,7 @@ block content
   - var li_url = titan.linkedin_url
   p #[strong Linkedin URL:]
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
-  p #[strong Created At:] #{titan.createdAt}
+  p #[strong Created At:] #{titan.created_at_yyyy_mm_dd}
 
   p #[strong Assigned To: ]
     if titan.freelancer == 'Not Assigned'

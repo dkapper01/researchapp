@@ -4,15 +4,6 @@ block content
   h1= title
   p  Welcome to the research app for list builders and beyond.
 
-  h1 Dynamic content
-
-
-  if error
-    p Error getting dynamic content.
-  else
-
-    p The research app has the following record counts:
-
     ul
       li #[strong Firms:] !{data.firm_count}
       li #[strong Companys:] !{data.company_count}

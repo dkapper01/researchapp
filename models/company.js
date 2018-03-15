@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var moment = require('moment'); // For date handling.
-var timestamps = require('mongoose-timestamp');
+// var timestamps = require('mongoose-timestamp');
 
 
 var Schema = mongoose.Schema;
@@ -13,6 +13,7 @@ var CompanySchema = new Schema({
     status: {type: String, required: true, enum:['Finished', 'Not Finished'], default:'Not Finished'},
     titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }],
     firm: { type: Schema.ObjectId, ref: 'Firm', required: true },
+    createdAt: {type: Date, default: Date.now() },
     investment_date: { type: Date }
 });
 
@@ -23,6 +24,11 @@ CompanySchema
   return '/data/company/'+this._id;
 });
 
+CompanySchema
+.virtual('created_at_yyyy_mm_dd')
+.get(function () {
+    return moment(this.createdAt).format('llll')
+});
 
 CompanySchema
 .virtual('investment_date_yyyy_mm_dd')
@@ -32,7 +38,7 @@ CompanySchema
 
 
 // Export model.
-CompanySchema.plugin(timestamps);
+// CompanySchema.plugin(timestamps);
 
 module.exports = mongoose.model('Company', CompanySchema);
 

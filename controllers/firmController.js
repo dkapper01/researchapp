@@ -10,7 +10,7 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.firm_list = function(req, res, next) {
 
   Firm.find()
-    .sort([['firm_name', 'descending']])
+    .sort([['createdAt', 'descending']])
     .exec(function (err, list_firms) {
       if (err) { return next(err); }
       // Successful, so render.
@@ -69,8 +69,8 @@ exports.firm_add_post = [
         {
             firm_name: req.body.firm_name,
             company: req.body.company,
-            status: req.body.status
-
+            status: req.body.status,
+            createdAt: req.body.createdAt
         });
 
 
@@ -189,6 +189,7 @@ exports.firm_update_post = [
           {
           firm_name: req.body.firm_name,
           status: req.body.status,
+          createdAt: req.body.createdAt,
           _id: req.params.id
           }
         );
@@ -209,28 +210,3 @@ exports.firm_update_post = [
         }
     }
 ];
-
-exports.new_company_get = function(req, res, next) {
-    res.render('company_form', { title: 'Add Company'});
-};
-
-exports.company_add_get = function(req, res, next) {
-
-    var company = new Company({
-
-        company_name: {type: String, required: true},
-        investment_date: { type: Date },
-        leadership_page_url: {type: String},
-        titanhouse_url: {type: String},
-        titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }],
-        firm: { type: Schema.ObjectId, ref: 'Firm', required: true }
-
-    });
-
-    company.save(function (err) {
-        if (err) { return next(err); }
-        //successful - redirect to new company record.
-        res.redirect(company.url);
-    });
-};
-

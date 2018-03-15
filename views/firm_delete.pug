@@ -5,24 +5,30 @@ block content
   h1 Delete Firm: #{firm.name}
   
   if firm_companys.length
-  
-    p #[strong Delete the following companys before attempting to delete this firm.]
-  
-    div(style='margin-left:20px;margin-top:20px')
-
-      h4 Companys
-    
-      dl
-      each company in firm_companys
-        dt 
-          a(href=company.url) #{company.title}
-        dd #{company.leadership_page_url}
-
+    p You must delete the following Titans before you can delete this company.
+    .table-responsive
+      table.table.table-striped.table-hover.table-bordered.table-margin
+        thead
+          tr
+            th #
+            th Company
+            th
+        tbody
+          - var count = 0
+          each val in firm_companys
+            tr
+              td(class='count_width') #{++count}
+              td(class='main_width')
+                a(href=val.url) #{val.company_name}
+              td #{val.created_at_yyyy_mm_dd}
+          else
+            p This company has no titans.
   else
-    p Do you really want to delete this Firm?
-    
+    p Do you really want to delete this Company?
+
     form(method='POST' action='')
       div.form-group
         input#id.form-control(type='hidden',name='id', required='true', value=firm._id )
 
       button.btn.btn-primary(type='submit') Delete
+

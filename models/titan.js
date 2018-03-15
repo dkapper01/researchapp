@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Firm = require('../models/firm');
 var Company = require('../models/company');
 var moment = require('moment'); // For date handling.
-var timestamps = require('mongoose-timestamp');
 
 var Schema = mongoose.Schema;
 
@@ -13,6 +12,7 @@ var TitanSchema = new Schema(
         bloomberg_url: {type: String},
         linkedin_url: {type: String},
         company: { type: Schema.ObjectId, ref: 'Company', required: true },
+        createdAt: {type: Date, default: Date.now() },
         freelancer: {type: String, required: true, enum:['Not Assigned', 'Steve Friedman', 'Hector Echavarria'], default:'Not Assigned'},
         profile_status: {type: String, required: true, enum:['In Progress', 'Invalid', 'Complete'], default: 'In Progress'}
     }
@@ -26,11 +26,16 @@ TitanSchema
 });
 
 TitanSchema
+.virtual('created_at_yyyy_mm_dd')
+.get(function () {
+    return moment(this.createdAt).format('llll')
+});
+
+TitanSchema
 .virtual('start_date_yyyy_mm_dd')
 .get(function () {
   return moment(this.start_date).format('YYYY-MM-DD');
 });
 
-TitanSchema.plugin(timestamps);
-// Export model.
+
 module.exports = mongoose.model('Titan', TitanSchema);

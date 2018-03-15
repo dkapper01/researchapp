@@ -18,7 +18,7 @@ block content
             td(class='count_width') #{++count}
             td(class='main_width')
               a(href=titan.url) #{titan.titan_name}
-            td #{titan.createdAt}
+            td #{titan.created_at_yyyy_mm_dd}
             td
               if titan.freelancer == 'Not Assigned'
                 span.text-danger #{titan.freelancer}
