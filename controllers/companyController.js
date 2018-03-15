@@ -28,7 +28,7 @@ exports.index = function(req, res) {
             Firm.count(callback);
         },
     }, function(err, results) {
-        res.render('index', { title: 'Researcher App', error: err, data: results });
+        res.render('index', { title: 'Researcher App', error: err, data: results, currentUser: req.user });
     });
 };
 
@@ -41,7 +41,7 @@ exports.company_list = function(req, res, next) {
             if (err) { return next(err); }
             // Successful, so render.
             console.log('Company List Here');
-            res.render('company_list', { title: 'Company List', list_companys:  list_companys});
+            res.render('company_list', { title: 'Company List', list_companys:  list_companys, currentUser: req.user });
         });
 };
 
@@ -67,7 +67,7 @@ exports.company_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('company_detail', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
+        res.render('company_detail', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan, currentUser: req.user} );
     });
 };
 
@@ -86,7 +86,7 @@ exports.company_add_get = function(req, res, next) {
         .exec(function (err, firms) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('company_form', {title: 'Add Company', forms:firms } );
+            res.render('company_form', {title: 'Add Company', forms:firms, currentUser: req.user } );
         });
 
 };
@@ -162,7 +162,7 @@ exports.company_delete_get = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('company_delete', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
+        res.render('company_delete', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan, currentUser: req.user } );
     });
 
 
@@ -218,7 +218,7 @@ exports.company_update_get = function(req, res, next) {
             return next(err);
         }
         // Success.
-        res.render('company_form', { title: 'Update  Company', firm_list : results.firm, company:results.company });
+        res.render('company_form', { title: 'Update  Company', firm_list : results.firm, company:results.company, currentUser: req.user });
     });
 
 };
