@@ -46,7 +46,7 @@ exports.titan_detail = function (req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys, currentUser: req.user });
+        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys});
     });
 
 };
