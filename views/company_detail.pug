@@ -2,11 +2,8 @@ extends layout
 
 block content
     h1 #{company.company_name}
-    h4(class='text-success') #{company._id}
-    //input(value=company._id)(id=foo)
-    //button(data-clipboard-target="#foo")(class='btn')
     h4
-        u Company Information
+        u Company Details
     p #[strong Firm: ]
         a(href=company.firm.url) #{company.firm.firm_name}
     p #[strong Investment date:] #{company.investment_date_yyyy_mm_dd}

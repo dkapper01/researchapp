@@ -8,6 +8,8 @@ var LocalStrategy = require('passport-local');
 var company_controller = require('../controllers/companyController');
 var titan_controller = require('../controllers/titanController');
 var firm_controller = require('../controllers/firmController');
+var user_controller = require('../controllers/userController');
+
 
 
 // COMPANY ROUTES ///
@@ -16,10 +18,10 @@ var firm_controller = require('../controllers/firmController');
 router.get('/', isLoggedIn, company_controller.index);
 
 // GET request for creating a Company. NOTE This must come before routes that display Company (uses id).
-router.get('/company/add', isLoggedIn, company_controller.company_add_get);
+router.get('/company/add/:firm_id', isLoggedIn, company_controller.company_add_get);
 
 // POST request for creating Company.
-router.post('/company/add/', isLoggedIn, company_controller.company_add_post);
+router.post('/company/add/:firm_id', isLoggedIn, company_controller.company_add_post);
 
 // GET request to delete Company.
 router.get('/company/:id/delete', isLoggedIn, company_controller.company_delete_get);
@@ -98,6 +100,9 @@ router.get('/firm/:id', isLoggedIn, firm_controller.firm_detail);
 
 // GET request for list of all Firm.
 router.get('/firms', isLoggedIn, firm_controller.firm_list);
+
+router.get('/users', user_controller.user_list);
+
 
 
 function isLoggedIn(req, res, next) {

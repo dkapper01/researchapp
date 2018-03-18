@@ -27,14 +27,10 @@ html
           ul.nav.navbar-nav.navbar-right.bg-primary
             li
               a(class='navbarText')(href='/data') Dashboard
-            li
-              a(class='navbarText') #{currentUser.username}
+            //li
+            //  a(class='navbarText') #{currentUser.username}
             li
               a(class='navbarText')(href='/login') Logout
-            //li
-            //    a(href='#') Help
-          //form.navbar-form.navbar-right
-          //  input.form-control(type='text', placeholder='Search...')
     .container-fluid
       .row
         .col-sm-3.col-md-2.sidebar
@@ -47,6 +43,8 @@ html
               a(href='/data/companys/') All Companies
             li(class=title=='Titan List'?'active':undefined)
               a(href='/data/titans') All Titans
+            li(class=title == 'User List' ? 'active' : undefined)
+              a(href='/users') All Users
 
 
                 //a(href='#') Export
@@ -62,7 +60,3 @@ html
     div(class='col-md-9 pushing-over')
 
       block content
-
-
-// script(src="js/jquery.min.js")
-// script(src="js/bootstrap.min.js")

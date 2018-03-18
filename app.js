@@ -24,9 +24,9 @@ app.use(helmet());
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
-var dev_db_url = 'mongodb://daniel:titanhouse@ds261488-a0.mlab.com:61488,ds261488-a1.mlab.com:61488/researchapp?replicaSet=rs-ds261488'
+// var dev_db_url = 'mongodb://daniel:titanhouse@ds261488-a0.mlab.com:61488,ds261488-a1.mlab.com:61488/researchapp?replicaSet=rs-ds261488'
 
-// var dev_db_url = 'mongodb://daniel:titanhouse@ds153198.mlab.com:53198/researchapp'
+var dev_db_url = 'mongodb://daniel:titanhouse@ds153198.mlab.com:53198/researchapp'
 
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB);
@@ -38,9 +38,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 // View engine setup
-app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
-
+app.set('view engine', 'pug');
 
 // Uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -53,12 +52,6 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
-
-app.use(function (req, res, next) {
-    res.locals.currentUser = req.user;
-    next();
-});
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));

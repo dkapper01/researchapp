@@ -28,7 +28,7 @@ exports.index = function(req, res) {
             Firm.count(callback);
         },
     }, function(err, results) {
-        res.render('index', { title: 'Researcher App', error: err, data: results, currentUser: req.user });
+        res.render('index', { title: 'Researcher App', error: err, data: results });
     });
 };
 
@@ -41,8 +41,9 @@ exports.company_list = function(req, res, next) {
             if (err) { return next(err); }
             // Successful, so render.
             console.log('Company List Here');
-            res.render('company_list', { title: 'Company List', list_companys:  list_companys, currentUser: req.user });
+            res.render('company_list', { title: 'Company List', list_companys:  list_companys});
         });
+    console.log(req.user.username);
 };
 
 // Display detail page for a specific company.
@@ -67,26 +68,19 @@ exports.company_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('company_detail', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan, currentUser: req.user} );
+        res.render('company_detail', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
     });
 };
 
 // Display company add form on GET.
 exports.company_add_get = function(req, res, next) {
-        // res.render('company_form', { title: 'Add Company' });
-    //
-    // Firm.find({},'firm_name')
-    //     .exec(function (err, firms) {
-    //         if (err) { return next(err); }
-    //         // Successful, so render.
-    //         res.render('company_form', {title: 'Add Company', firm_list:firms } );
-    //     });
+    var the_firm_id = req.params.firm_id;
 
     Firm.find({},'firm_name')
         .exec(function (err, firms) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('company_form', {title: 'Add Company', forms:firms, currentUser: req.user } );
+            res.render('company_form', {title: 'Add Company', firms:firms, the_firm_id: the_firm_id } );
         });
 
 };
@@ -103,7 +97,7 @@ exports.company_add_post = [
 
     var company = new Company(
         {
-            firm: req.body.firm,
+            firm: req.params.firm_id,
             company_name: req.body.company_name,
             leadership_page_url: req.body.leadership_page_url,
             titanhouse_url: req.body.titanhouse_url,
@@ -162,7 +156,7 @@ exports.company_delete_get = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('company_delete', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan, currentUser: req.user } );
+        res.render('company_delete', { title: 'Company Detail', firm: results.firm, company:  results.company, company_titan: results.company_titan } );
     });
 
 
@@ -218,7 +212,7 @@ exports.company_update_get = function(req, res, next) {
             return next(err);
         }
         // Success.
-        res.render('company_form', { title: 'Update  Company', firm_list : results.firm, company:results.company, currentUser: req.user });
+        res.render('company_form', { title: 'Update  Company', firm_list : results.firm, company:results.company });
     });
 
 };

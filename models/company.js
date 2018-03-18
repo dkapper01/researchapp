@@ -14,7 +14,8 @@ var CompanySchema = new Schema({
     titan: [{ type: Schema.ObjectId, ref: 'Titan', required: true }],
     firm: { type: Schema.ObjectId, ref: 'Firm', required: true },
     createdAt: {type: Date, default: Date.now() },
-    investment_date: { type: Date }
+    investment_date: { type: Date },
+    user: {type: Schema.ObjectId, ref: 'User' }
 });
 
 // Virtual for this company instance URL.

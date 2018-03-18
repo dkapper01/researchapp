@@ -14,11 +14,8 @@ exports.firm_list = function(req, res, next) {
     .exec(function (err, list_firms) {
       if (err) { return next(err); }
       // Successful, so render.
-      res.render('firm_list', { title: 'Firm List', list_firms:  list_firms, currentUser: req.user });
+      res.render('firm_list', { title: 'Firm List', list_firms:  list_firms});
     });
-    console.log('cat');
-
-
 };
 
 // Display detail page for a specific Firm.
@@ -43,14 +40,14 @@ exports.firm_detail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('firm_detail', { title: 'Firm Detail', firm: results.firm, firm_company: results.firm_company, currentUser: req.user } );
+        res.render('firm_detail', { title: 'Firm Detail', firm: results.firm, firm_company: results.firm_company } );
     });
 
 };
 
 // Display Firm add form on GET.
 exports.firm_add_get = function(req, res, next) {
-    res.render('firm_form', { title: 'Add Firm', currentUser: req.user });
+    res.render('firm_form', { title: 'Add Firm'});
 };
 
 // Handle Firm add on POST.
@@ -70,7 +67,9 @@ exports.firm_add_post = [
             firm_name: req.body.firm_name,
             company: req.body.company,
             status: req.body.status,
-            createdAt: req.body.createdAt
+            createdAt: req.body.createdAt,
+            publisher: req.body.publisher,
+            author: req.body.author
         });
 
 
@@ -91,10 +90,8 @@ Firm.findOne({'firm_name': req.body.firm_name})
                 if (err) {
                     return next(err);
                 }
-                // Firm saved. Redirect to firm detail page.
                 res.redirect(firm.url);
             });
-
         }
 
     });
@@ -117,7 +114,7 @@ exports.firm_delete_get = function(req, res, next) {
             res.redirect('/data/firms');
         }
         // Successful, so render.
-        res.render('firm_delete', { title: 'Delete Firm', firm: results.firm, firm_companys: results.firm_companys, currentUser: req.user } );
+        res.render('firm_delete', { title: 'Delete Firm', firm: results.firm, firm_companys: results.firm_companys } );
     });
 
 };
@@ -137,7 +134,7 @@ exports.firm_delete_post = function(req, res, next) {
         // Success
         if (results.firm_companys.length > 0) {
             // Firm has companys. Render in same way as for GET route.
-            res.render('firm_delete', { title: 'Delete Firm', firm: results.firm, firm_companys: results.firm_companys, currentUser: req.user } );
+            res.render('firm_delete', { title: 'Delete Firm', firm: results.firm, firm_companys: results.firm_companys } );
             return;
         }
         else {
@@ -164,7 +161,7 @@ exports.firm_update_get = function(req, res, next) {
             return next(err);
         }
         // Success.
-        res.render('firm_form', { title: 'Update Firm', firm: firm, currentUser: req.user });
+        res.render('firm_form', { title: 'Update Firm', firm: firm });
     });
 
 };
@@ -197,7 +194,7 @@ exports.firm_update_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values and error messages.
-            res.render('firm_form', { title: 'Update Firm', firm: firm, errors: errors.array(), currentUser: req.user});
+            res.render('firm_form', { title: 'Update Firm', firm: firm, errors: errors.array()});
         return;
         }
         else {

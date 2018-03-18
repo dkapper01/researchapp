@@ -5,9 +5,8 @@ extends layout
 block content
 
     h1 #{firm.firm_name}
-    h4(class='text-success') #{firm._id}
     h4
-      u Firm Information
+      u Firm Details
     p #[strong CreatedAt: ] #{firm.created_at_yyyy_mm_dd}
     p #[strong Status: ]
       if firm.status == 'Not Finished'
@@ -41,7 +40,7 @@ block content
 
     hr
     p
-        a(class='btn btn-success btn-spacing')(href='/data/company/add') Add Company
+        a(class='btn btn-success btn-spacing')(href='/data/company/add/' + firm._id) Add Company
 
         a(class='btn btn-warning btn-spacing')(href=firm.url+'/update') Update firm
 

@@ -46,7 +46,7 @@ exports.titan_detail = function (req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys, currentUser: req.user});
+        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys});
     });
 
 };
@@ -60,7 +60,7 @@ exports.titan_add_get = function (req, res, next) {
         .exec(function (err, companys) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('titan_form', {title: 'Add Titan', company_list:companys, currentUser: req.user} );
+            res.render('titan_form', {title: 'Add Titan', company_list:companys } );
         });
 
     // Company.find({}, 'company_name')
@@ -152,7 +152,7 @@ exports.titan_delete_get = function (req, res, next) {
             res.redirect('/data/titans');
         }
         // Successful, so render.
-        res.render('titan_delete', { title: 'Delete Titan', titan: results.titan, titan_companys: results.titans_companys, currentUser: req.user });
+        res.render('titan_delete', { title: 'Delete Titan', titan: results.titan, titan_companys: results.titans_companys });
     });
 
 };
@@ -172,7 +172,7 @@ exports.titan_delete_post = function (req, res, next) {
         // Success.
         if (results.titans_companys.length > 0) {
             // Titan has companys. Render in same way as for GET route.
-            res.render('titan_delete', { title: 'Delete Titan', titan: results.titan, titan_companys: results.titans_companys, currentUser: req.user });
+            res.render('titan_delete', { title: 'Delete Titan', titan: results.titan, titan_companys: results.titans_companys });
             return;
         }
         else {
@@ -207,7 +207,7 @@ exports.titan_update_get = function (req, res, next) {
             return next(err);
         }
         // Success.
-        res.render('titan_form', { title: 'Update  Titan', company_list : results.company, titan:results.titan, currentUser: req.user });
+        res.render('titan_form', { title: 'Update  Titan', company_list : results.company, titan:results.titan });
     });
 
 };
@@ -250,4 +250,3 @@ Titan.findByIdAndUpdate(req.params.id, titan, {}, function (err, thetitan) {
 
 }
 ];
-

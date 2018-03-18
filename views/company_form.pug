@@ -1,12 +1,6 @@
 extends layout
 
 block content
-    //h1= title
-
-    script
-        | var i = firmID
-        | console.log('')
-
 
 
     form(class='form-style')(method='POST' action='')
@@ -22,23 +16,14 @@ block content
         div.form-group
             label(for='titanhouse_url') Titanhouse URL:
             input#titanhouse_url.form-control(type='text', placeholder='' required='true' name='titanhouse_url' value=(undefined === company ? '' : company.titanhouse_url) )
-        div.form-group
-          label(for='firm') Firm ID:
-          input#firm.form-control(type='text', placeholder='' name='firm' required='true' value=(undefined === company ? '' : company.firm.id) )
+        //div.form-group
+        //  label(for='firm') Firm ID:
+        //  input#firm.form-control(type='text', placeholder='' name='firm'  value=(undefined === company ? '' : company.firm.id) )
         div.form-group
             label(for='status') Status:
             select#status.form-control(type='select', placeholder='Select status' name='status' required='true' )
                 option(value='Not Finished' selected=(undefined === company || company.status != 'Not Finished' ? false : 'selected')) Not Finished
                 option(value='Finished' selected=(undefined === company || company.status != 'Finished' ? false : 'selected')) Finished
-
-        //div.form-group
-        //  label(for='firm') Firm:
-        //    select#firm.form-control(type='select', placeholder='Select firm' name='firm' required='true' )
-        //      for firm in firm_list
-        //         option(value=firm._id, selected=(selected_firm==firm._id.toString() ? 'selected' : false) ) #{firm.firm_name}
-        //div.form-group
-        //    label(for='firm') Firm:
-        //    input#firm.form-control(type='text', placeholder='' name='firm' value=(undefined === company ? '' : company.firm) )
         button.btn.btn-primary(type='submit') Submit
 
     if errors

@@ -1,7 +1,10 @@
 var mongoose = require("mongoose");
+var Company = require('../models/company');
+var Titan = require('../models/titan');
+var Firm = require('../models/firm');
+var User = require('../models/user');
+var async = require('async');
 var passport = require("passport");
-var User = require("../models/user");
-
 
 // Restrict access to root page
 exports.home = function(req, res) {
@@ -43,6 +46,18 @@ exports.logout = function(req, res) {
     req.logout();
     res.redirect('/login');
 };
+
+exports.user_list = function (req, res) {
+    res.send('Hey its working');
+    // User.find()
+    //     .sort([['username', 'descending']])
+    //     .exec(function (err, list_users) {
+    //         if(err) { return next(err); }
+    //     res.render('user_list', { title: 'User List', list_users: list_users });
+    //     });
+};
+
+
 
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
