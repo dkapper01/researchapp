@@ -53,14 +53,13 @@ exports.titan_detail = function (req, res, next) {
 
 // Display Titan add form on GET.
 exports.titan_add_get = function (req, res, next) {
-    // res.render('titan_form', { title: 'Add Titan' });
-
+    var the_company_id = req.params.company_id;
 
     Company.find({},'company_name')
         .exec(function (err, companys) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('titan_form', {title: 'Add Titan', company_list:companys } );
+            res.render('titan_form', {title: 'Add Titan', company_list:companys, the_company_id: the_company_id } );
         });
 
     // Company.find({}, 'company_name')
@@ -97,7 +96,7 @@ exports.titan_add_post = [
     // Add a titan object with escaped and trimmed data.
     var titan = new Titan(
         {
-            company: req.body.company,
+            company: req.params.company_id,
             titan_name: req.body.titan_name,
             start_date: req.body.start_date,
             bloomberg_url: req.body.bloomberg_url,

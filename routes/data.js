@@ -51,10 +51,10 @@ router.get('/companys', isLoggedIn, company_controller.company_list);
 /// TITAN ROUTES ///
 
 // GET request for creating Titan. NOTE This must come before route for id (i.e. display titan).
-router.get('/titan/add', isLoggedIn, titan_controller.titan_add_get);
+router.get('/titan/add/:company_id', isLoggedIn, titan_controller.titan_add_get);
 
 // POST request for creating Titan.
-router.post('/titan/add', isLoggedIn, titan_controller.titan_add_post);
+router.post('/titan/add/:company_id', isLoggedIn, titan_controller.titan_add_post);
 
 // GET request to delete Titan.
 router.get('/titan/:id/delete', isLoggedIn, titan_controller.titan_delete_get);

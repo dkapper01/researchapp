@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1 #{company.company_name}
+    h1 #{company.company_name} #{company._id}
     h4
         u Company Details
     p #[strong Firm: ]
@@ -42,7 +42,7 @@ block content
                     p This company has no titans.
     hr
     p
-        a(class='btn btn-success btn-spacing')(href='/data/titan/add') Add Titan
+        a(class='btn btn-success btn-spacing')(href='/data/titan/add/' + company._id) Add Titan
 
         a(class='btn btn-warning btn-spacing')(href=company.url+'/update') Update firm
 

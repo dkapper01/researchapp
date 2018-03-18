@@ -10,10 +10,13 @@ block content
     a(href=titan.company.firm.url) #{titan.company.firm.firm_name}
   p #[strong Company: ]
     a(href=titan.company.url) #{titan.company.company_name}
-  p #[strong Investment Date:] #{titan.company.investment_date}
+  p #[strong Investment Date:] #{titan.company.investment_date_yyyy_mm_dd}
   - var leadership = titan.company.leadership_page_url
   p #[strong Leadership Page URL: ]
     a(href=leadership, target='_blank') #{titan.company.leadership_page_url}
+  p #[strong TitanHouse URL: ]
+    - var titanhouse = titan.company.titanhouse_url
+    a(href=titanhouse, target='_blank') #{titan.company.titanhouse_url}
   p #[strong Start Date:] #{titan.start_date_yyyy_mm_dd}
   - var bb_url = titan.bloomberg_url
   p #[strong Bloomberg URL:]
@@ -22,7 +25,6 @@ block content
   p #[strong Linkedin URL:]
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
   p #[strong Created At:] #{titan.created_at_yyyy_mm_dd}
-  //p #{currentUser}
 
   p #[strong Assigned To: ]
     if titan.freelancer == 'Not Assigned'
