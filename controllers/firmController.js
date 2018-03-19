@@ -12,7 +12,7 @@ exports.firm_list = function(req, res, next) {
   var currentUser = req.user
 
   Firm.find()
-    .sort([['createdAt', 'descending']])
+    .sort([['_id', -1]])
     .exec(function (err, list_firms) {
       if (err) { return next(err); }
       // Successful, so render.

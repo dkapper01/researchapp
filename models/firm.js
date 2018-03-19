@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Firm = require('../models/firm');
 var Company = require('../models/company');
 var moment = require('moment'); // For date handling.
+var passportLocalMongoose = require('passport-local-mongoose');
 
 
 var Schema = mongoose.Schema;
@@ -26,7 +27,7 @@ FirmSchema
 FirmSchema
 .virtual('created_at_yyyy_mm_dd')
 .get(function () {
-    return moment(this.createdAt).format('l')
+    return moment(this.createdAt).format('llll')
 });
 
 module.exports = mongoose.model('Firm', FirmSchema);

@@ -28,7 +28,7 @@ html
             li
               a(class='navbarText')(href='/data') Dashboard
             //li
-            //  a(class='navbarText') #{currentUser.username}
+            //  a(class='navbarText') #{user.username}
             li
               a(class='navbarText')(href='/login') Logout
     .container-fluid
@@ -44,7 +44,7 @@ html
             li(class=title=='Titan List'?'active':undefined)
               a(href='/data/titans') All Titans
             li(class=title == 'User List' ? 'active' : undefined)
-              a(href='/users') All Users
+              a(href='/data/users') All Users
 
 
                 //a(href='#') Export

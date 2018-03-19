@@ -103,6 +103,8 @@ router.get('/firms', isLoggedIn, firm_controller.firm_list);
 
 router.get('/users', user_controller.user_list);
 
+router.get('/user/:id', isLoggedIn, user_controller.user_detail);
+
 
 
 function isLoggedIn(req, res, next) {

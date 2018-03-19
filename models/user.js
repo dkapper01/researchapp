@@ -5,9 +5,16 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     username: String,
-    password: String
+    password: String,
+    titan: [{ type: Schema.ObjectId, ref: 'Titan'}]
 });
 
 UserSchema.plugin(passportLocalMongoose);
+
+UserSchema
+    .virtual('url')
+    .get(function () {
+        return '/data/user/'+this._id;
+    });
 
 module.exports = mongoose.model('User', UserSchema);

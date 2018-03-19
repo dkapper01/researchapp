@@ -1,6 +1,16 @@
 extends layout
 
 block content
-  h1 User List
-
-  p #{user.username}
+    .table-responsive
+        table.table.table-striped.table-hover.table-bordered.table-margin
+            thead
+                //tr
+                th #
+                th User
+            tbody
+                - var count = 0
+                each user in list_users
+                  tr
+                    td(class='count_width') #{++count}
+                    td(class='main_width')
+                      a(href=user.url) #{user.username}

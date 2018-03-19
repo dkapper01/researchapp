@@ -47,14 +47,19 @@ exports.logout = function(req, res) {
     res.redirect('/login');
 };
 
-exports.user_list = function (req, res) {
-    res.send('Hey its working');
-    // User.find()
-    //     .sort([['username', 'descending']])
-    //     .exec(function (err, list_users) {
-    //         if(err) { return next(err); }
-    //     res.render('user_list', { title: 'User List', list_users: list_users });
-    //     });
+exports.user_list = function (req, res, next) {
+
+    User.find({}, function(err, list_users) {
+        if(err) { return next(err) }
+        res.render('user_list', { list_users: list_users })
+    });
+};
+
+exports.user_detail = function (req, res, next) {
+    User.findById(req.params.id, function (err, user) {
+        if(err) { return next(err) }
+        res.render('user_detail', { user: user })
+    });
 };
 
 
