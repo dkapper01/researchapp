@@ -7,6 +7,7 @@ block content
     h1 #{firm.firm_name}
     h4
       u Firm Details
+    p #[strong Publisher: ] #{firm.publisher}
     p #[strong CreatedAt: ] #{firm.created_at_yyyy_mm_dd}
     p #[strong Status: ]
       if firm.status == 'Not Finished'
@@ -20,8 +21,8 @@ block content
                 tr
                     th #
                     th Portfolio Company
-                    th Status
                     th Created At
+                    th Status
             tbody
                 - var count = 0
                 each val in firm_company

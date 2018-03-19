@@ -5,7 +5,8 @@ block content
   h1 #{titan.titan_name}
   h4
     u Titan Information
-
+  p #[strong Publisher: ] #{titan.publisher}
+  p #[strong Created At:] #{titan.created_at_yyyy_mm_dd}
   p #[strong Firm: ]
     a(href=titan.company.firm.url) #{titan.company.firm.firm_name}
   p #[strong Company: ]
@@ -24,7 +25,6 @@ block content
   - var li_url = titan.linkedin_url
   p #[strong Linkedin URL:]
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
-  p #[strong Created At:] #{titan.created_at_yyyy_mm_dd}
 
   p #[strong Assigned To: ]
     if titan.freelancer == 'Not Assigned'

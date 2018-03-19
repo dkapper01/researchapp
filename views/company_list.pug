@@ -8,8 +8,9 @@ block content
         //tr
         th #
         th Companies
-        th Status
+        th Publisher
         th Created At
+        th Status
       tbody
         - var count = 0
         each company in list_companys
@@ -17,32 +18,13 @@ block content
             td(class='count_width') #{++count}
             td(class='main_width')
               a(href=company.url) #{company.company_name}
+            td #{company.publisher}
+            td #{company.created_at_yyyy_mm_dd}
             td
               if company.status == 'Not Finished'
                 span.text-danger #{company.status}
               if company.status == "Finished"
                 span.text-success #{company.status}
-            td #{company.created_at_yyyy_mm_dd}
-
-    //nav(aria-label='Page navigation')
-    //    ul.pagination
-    //        li
-    //            a(href='#', aria-label='Previous')
-    //                span(aria-hidden='true') «
-    //        li
-    //            a(href='#') 1
-    //        li
-    //            a(href='#') 2
-    //        li
-    //            a(href='#') 3
-    //        li
-    //            a(href='#') 4
-    //        li
-    //            a(href='#') 5
-    //        li
-    //            a(href='#', aria-label='Next')
-    //                span(aria-hidden='true') »
-
 
 
 

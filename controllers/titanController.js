@@ -102,7 +102,8 @@ exports.titan_add_post = [
             bloomberg_url: req.body.bloomberg_url,
             linkedin_url: req.body.linkedin_url,
             freelancer: req.body.freelancer,
-            profile_status: req.body.profile_status
+            profile_status: req.body.profile_status,
+            publisher: req.user.username
         });
 
 

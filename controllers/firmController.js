@@ -9,18 +9,20 @@ const { sanitizeBody } = require('express-validator/filter');
 // Display list of all Firm.
 exports.firm_list = function(req, res, next) {
 
+  var currentUser = req.user
+
   Firm.find()
     .sort([['createdAt', 'descending']])
     .exec(function (err, list_firms) {
       if (err) { return next(err); }
       // Successful, so render.
-      res.render('firm_list', { title: 'Firm List', list_firms:  list_firms});
+      res.render('firm_list', { title: 'Firm List', list_firms:  list_firms, currentUser: currentUser } );
     });
+
 };
 
 // Display detail page for a specific Firm.
 exports.firm_detail = function(req, res, next) {
-
 
     async.parallel({
         firm: function(callback) {
@@ -47,19 +49,20 @@ exports.firm_detail = function(req, res, next) {
 
 // Display Firm add form on GET.
 exports.firm_add_get = function(req, res, next) {
-    res.render('firm_form', { title: 'Add Firm'});
+    var currentUser = req.user;
+    res.render('firm_form', { title: 'Add Firm', currentUser: currentUser });
 };
 
 // Handle Firm add on POST.
 exports.firm_add_post = [
-
 
     // Sanitize (trim and escape) the name field.
     sanitizeBody('firm_name').trim().escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
-
+    console.log(req.user.username);
+    publisher: "hat";
 
     // Add a firm object with escaped and trimmed data.
     var firm = new Firm(
@@ -68,10 +71,8 @@ exports.firm_add_post = [
             company: req.body.company,
             status: req.body.status,
             createdAt: req.body.createdAt,
-            publisher: req.body.publisher,
-            author: req.body.author
+            publisher: req.user.username
         });
-
 
 // Data from form is valid.
 // Check if Firm with same name already exists.

@@ -15,6 +15,7 @@ var CompanySchema = new Schema({
     firm: { type: Schema.ObjectId, ref: 'Firm', required: true },
     createdAt: {type: Date, default: Date.now() },
     investment_date: { type: Date },
+    publisher: {type: String},
     user: {type: Schema.ObjectId, ref: 'User' }
 });
 

@@ -1,9 +1,10 @@
 extends layout
 
 block content
-    h1 #{company.company_name} #{company._id}
+    h1 #{company.company_name}
     h4
         u Company Details
+    p #[strong Publisher: ] #{company.publisher}
     p #[strong Firm: ]
         a(href=company.firm.url) #{company.firm.firm_name}
     p #[strong Investment date:] #{company.investment_date_yyyy_mm_dd}
@@ -20,7 +21,6 @@ block content
             span.text-danger #{company.status}
         else if company.status == 'Finished'
             span.text-success #{company.status}
-
 
 
     .table-responsive

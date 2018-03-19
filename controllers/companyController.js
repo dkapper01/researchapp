@@ -43,7 +43,7 @@ exports.company_list = function(req, res, next) {
             console.log('Company List Here');
             res.render('company_list', { title: 'Company List', list_companys:  list_companys});
         });
-    console.log(req.user.username);
+    console.log(req.user);
 };
 
 // Display detail page for a specific company.
@@ -74,7 +74,10 @@ exports.company_detail = function(req, res, next) {
 
 // Display company add form on GET.
 exports.company_add_get = function(req, res, next) {
+    console.log(req.user)
+
     var the_firm_id = req.params.firm_id;
+    // console.log(req.user._id);
 
     Firm.find({},'firm_name')
         .exec(function (err, firms) {
@@ -103,7 +106,8 @@ exports.company_add_post = [
             titanhouse_url: req.body.titanhouse_url,
             investment_date: req.body.investment_date,
             createdAt: req.body.createdAt,
-            status: req.body.status
+            status: req.body.status,
+            publisher: req.user.username
         });
 
 
@@ -125,6 +129,7 @@ Company.findOne({'company_name': req.body.company_name})
                     return next(err);
                 }
                 // Firm saved. Redirect to company detail page.
+                console.log(req.user);
                 res.redirect(company.url);
             });
 
@@ -230,6 +235,7 @@ exports.company_update_post = function (req, res, next) {
             status: req.body.status,
             investment_date: req.body.investment_date,
             createdAt: req.body.createdAt,
+            // publisher: req.body.publisher,
             _id: req.params.id // This is required, or a new ID will be assigned!
         });
 

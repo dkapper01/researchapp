@@ -6,6 +6,9 @@ block content
     div.form-group
       label(for='firm_name') Firm:
       input#firm_name.form-control(type='text', placeholder='PE, VE, Stock Leaders.' name='firm_name' required='true' value=(undefined===firm ? '' : firm.firm_name) )
+    //div.form-group
+    //  label(for='publisher') Firm:
+    //  input#publisher.form-control(type='text', placeholder='PE, VE, Stock Leaders.' name='publisher' required='true' value=(undefined === firm ? '' : firm.publisher) )
     div.form-group
       label(for='status') Status:
       select#status.form-control(type='select', placeholder='Select status' name='status' required='true' )
