@@ -4,3 +4,13 @@ block content
   h1 User Detail
 
   p #{user.username}
+  p Hello
+
+  dl
+      each titan in user_titans
+          dt
+            a(href=titan.url) #{titan.titan_name}
+
+      else
+          p This author has no books.n user_titans
+

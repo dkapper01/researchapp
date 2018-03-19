@@ -18,12 +18,13 @@ exports.register_get = function(req, res) {
 
 // Post registration
 exports.register_post = function(req, res) {
-    User.register(new User({ username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
+    User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
         if (err) {
             return res.render('register', { user : user });
         }
 
         passport.authenticate('local')(req, res, function () {
+
             res.redirect('/data');
         });
     });
@@ -56,10 +57,33 @@ exports.user_list = function (req, res, next) {
 };
 
 exports.user_detail = function (req, res, next) {
-    User.findById(req.params.id, function (err, user) {
-        if(err) { return next(err) }
-        res.render('user_detail', { user: user })
+
+    // User.findById(req.params.id, function (err, user) {
+    //     if(err) { return next(err) }
+    //     res.render('user_detail', { user: user })
+    // });
+
+    async.parallel({
+        user: function (callback) {
+            User.findById(req.params.id)
+                .populate('titan')
+                .exec(callback)
+        },
+        users_titans: function (callback) {
+            Titan.find({ 'user': req.params.id })
+                .exec(callback)
+        },
+    }, function (err, results) {
+        if (err) { return next(err); } // Error in API usage.
+        if (results.user == null) { // No results.
+            var err = new Error('User not found');
+            err.status = 404;
+            return next(err);
+        }
+        // Successful, so render.
+        res.render('user_detail', { title: 'User Detail', user: results.user, user_titans: results.users_titans });
     });
+
 };
 
 

@@ -91,6 +91,7 @@ exports.titan_add_post = [
             linkedin_url: req.body.linkedin_url,
             freelancer: req.body.freelancer,
             profile_status: req.body.profile_status,
+            user: req.body.user,
             publisher: req.user.username
         });
 
@@ -223,6 +224,7 @@ exports.titan_update_post = [
             linkedin_url: req.body.linkedin_url,
             freelancer: req.body.freelancer,
             profile_status: req.body.profile_status,
+            user: req.body.user,
             _id: req.params.id
         }
     );
