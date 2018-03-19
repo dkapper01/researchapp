@@ -19,6 +19,16 @@ block content
     //div.form-group
     //  label(for='company') Company ID:
     //  input#company.form-control(type='text', placeholder='' name='company' required='true' value=(undefined === titan ? '' : titan.company.id))
+      
+    div.form-group
+      label(for='user') Freelancer:
+      select#user.form-control(type='select', placeholder='Select user' name='user' required='true' )
+        for user in users
+          if titan
+            option(value=user._id selected=(user._id.toString() == titan.user._id.toString() ? 'selected' : false) ) #{user.username}
+          else
+            option(value=user._id) #{user.username}
+
     div.form-group
       label(for='freelancer') Freelancer:
       select#freelancer.form-control(type='select', placeholder='Select Freelancer' name='freelancer' required='true' )

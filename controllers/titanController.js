@@ -55,30 +55,18 @@ exports.titan_detail = function (req, res, next) {
 exports.titan_add_get = function (req, res, next) {
     var the_company_id = req.params.company_id;
 
-    Company.find({},'company_name')
-        .exec(function (err, companys) {
-            if (err) { return next(err); }
-            // Successful, so render.
-            res.render('titan_form', {title: 'Add Titan', company_list:companys, the_company_id: the_company_id } );
-        });
-
-    // Company.find({}, 'company_name')
-    //     .exec(function (err, companys) {
-    //         if(err) { return next(err); }
-    //         res.render('titan_form', {title: 'Add Titan', company_list:companys });
-    //     });
-
-
-    // async.parallel({
-    //         companys: function(callback) {
-    //             Company.find(callback);
-    //         },
-    //
-    //     },
-    //     function(err, results) {
-    //         if (err) { return next(err); }
-    //         res.render('titan_form', { title: 'Create Company',companys:results.companys });
-    //     });
+    // Get all users and genres, which we can use for adding to our titan.
+    async.parallel({
+        users: function(callback) {
+            User.find(callback);
+        },
+        companys: function(callback) {
+            Company.find(callback);
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        res.render('titan_form', { title: 'Add Titan',users:results.users, companys:results.companys, the_company_id: the_company_id });
+    });
 };
 
 // Handle Titan add on POST.
