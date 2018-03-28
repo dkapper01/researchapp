@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     username: String,
     password: String,
-    titan: [{ type: Schema.ObjectId, ref: 'Titan'}]
+    admin: { type: Boolean, default: false },
+    // titan: [{ type: Schema.ObjectId, ref: 'Titan'}]
 });
 
 UserSchema.plugin(passportLocalMongoose);

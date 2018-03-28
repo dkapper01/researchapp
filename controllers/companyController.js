@@ -74,7 +74,6 @@ exports.company_detail = function(req, res, next) {
 
 // Display company add form on GET.
 exports.company_add_get = function(req, res, next) {
-    console.log(req.user)
 
     var the_firm_id = req.params.firm_id;
     // console.log(req.user._id);

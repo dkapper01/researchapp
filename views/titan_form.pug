@@ -16,10 +16,6 @@ block content
     div.form-group
       label(for='linkedin_url') Linkedin URL:
       input#linkedin_url.form-control(type='text', placeholder='' name='linkedin_url' value=(undefined === titan ? '' : titan.linkedin_url))
-    //div.form-group
-    //  label(for='company') Company ID:
-    //  input#company.form-control(type='text', placeholder='' name='company' required='true' value=(undefined === titan ? '' : titan.company.id))
-      
     div.form-group
       label(for='user') Freelancer:
       select#user.form-control(type='select', placeholder='Select user' name='user' required='true' )
@@ -28,13 +24,6 @@ block content
             option(value=user._id selected=(user._id.toString() == titan.user._id.toString() ? 'selected' : false) ) #{user.username}
           else
             option(value=user._id) #{user.username}
-
-    div.form-group
-      label(for='freelancer') Freelancer:
-      select#freelancer.form-control(type='select', placeholder='Select Freelancer' name='freelancer' required='true' )
-        option(value='Not Assigned' selected=(undefined === titan || titan.freelancer != 'Not Assigned' ? false : 'selected')) Not Assigned
-        option(value='Steve Friedman' selected=(undefined === titan || titan.freelancer != 'Steve Friedman' ? false : 'selected')) Steve Friedman
-        option(value='Hector Echavarria' selected=(undefined === titan || titan.freelancer != 'Hector Echavarria' ? false : 'selected')) Hector Echavarria
     div.form-group
       label(for='profile_status') Profile Status:
       select#profile_status.form-control(type='select', placeholder='Select Profile Status' name='profile_status' required='true' )

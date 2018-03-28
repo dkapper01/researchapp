@@ -17,8 +17,7 @@ var TitanSchema = new Schema(
         createdAt: {type: Date, default: Date.now() },
         freelancer: {type: String, required: true, enum:['Not Assigned', 'Steve Friedman', 'Hector Echavarria'], default:'Not Assigned'},
         profile_status: {type: String, required: true, enum:['In Progress', 'Invalid', 'Complete'], default: 'In Progress'},
-        // user: { type: Schema.ObjectId, ref: 'User' },
-        user: { type: Schema.ObjectId, ref: 'User' },
+        user: { type: Schema.ObjectId, ref: 'User', required: true },
         publisher: String
     }
   );

@@ -1,16 +1,29 @@
 extends user_layout
 
 block content
-  h1 User Detail
+    h1 #{user.username}
 
-  p #{user.username}
-  p Hello
 
-  dl
-      each titan in user_titans
-          dt
-            a(href=titan.url) #{titan.titan_name}
+    .table-responsive
+        table.table.table-striped.table-hover.table-bordered.table-margin
+            thead
+                //tr
+                th #
+                th Titan
+                th Status
+            tbody
+                - var count = 0
+                each titan in user_titans
+                    tr
+                        td(class='count_width') #{++count}
+                        td(class='main_width')
+                            a(href=titan.url) #{titan.titan_name}
+                        td
+                            if titan.profile_status == 'In Progress'
+                                span.text-warning #{titan.profile_status}
+                            else if titan.profile_status == 'Invalid'
+                                span.text-danger #{titan.profile_status}
+                            else if titan.profile_status == 'Complete'
+                                span.text-success #{titan.profile_status}
 
-      else
-          p This author has no books.n user_titans
 

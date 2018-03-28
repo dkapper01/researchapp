@@ -12,12 +12,27 @@ const { sanitizeBody } = require('express-validator/filter');
 exports.titan_list = function (req, res, next) {
 
     Titan.find()
+        .populate('company')
+        .populate('user', 'username')
         .sort([['_id', -1]])
         .exec(function (err, list_titans) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('titan_list', { title: 'Titan List', titan_lists: list_titans, currentUser: req.user });
+            // console.log(titan.user._id.toString())
+            res.render('titan_list', { title: 'Titan List', titan_lists: list_titans });
         });
+
+    // async.parallel({
+    //     users: function(callback) {
+    //         User.find(callback);
+    //     },
+    //     titan_lists: function(callback) {
+    //         Titan.find(callback);
+    //     },
+    // }, function(err, results) {
+    //     if (err) { return next(err); }
+    //     res.render('titan_list', { title: 'Titan List',users:results.users, titan_lists:results.titan_lists });
+    // });
 };
 
 // Display detail page for a specific Titan.
@@ -27,17 +42,18 @@ exports.titan_detail = function (req, res, next) {
 
         titan: function (callback) {
             Titan.findById(req.params.id)
-                .populate('company')
+                .populate('user', 'username')
                 .populate({
                     path: 'company',
                     populate: { path: 'firm' }
                 }).exec(callback);
         },
 
-        // titan_companys: function (callback) {
-        //     Company.find({ 'company': req.params.id })
-        //         .exec(callback)
-        // },
+        titan_user: function (callback) {
+            User.findOne()
+                .populate('user', 'username')
+                .exec(callback)
+        },
     }, function (err, results) {
         if (err) { return next(err); } // Error in API usage.
         if (results.titan == null) { // No results.
@@ -46,10 +62,15 @@ exports.titan_detail = function (req, res, next) {
             return next(err);
         }
         // Successful, so render.
-        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_companys: results.titan_companys});
+        res.render('titan_detail', { title: 'Titan Detail',  titan: results.titan, titan_user: results.titan_user});
     });
 
-};
+    // User.findOne({username:'someusername'}).exec(function(err,user){
+    //     console.log(user) //this gives full object with something like {_id:234234dfdfg,username:'someusername'}
+
+
+
+    };
 
 // Display Titan add form on GET.
 exports.titan_add_get = function (req, res, next) {
@@ -182,10 +203,13 @@ exports.titan_update_get = function (req, res, next) {
 
     async.parallel({
         titan: function(callback) {
-            Titan.findById(req.params.id).populate('company').exec(callback)
+            Titan.findById(req.params.id).populate('user').exec(callback)
         },
         company: function(callback) {
             Company.find(callback)
+        },
+        users: function(callback) {
+            User.find(callback)
         },
 
     }, function(err, results) {
@@ -196,7 +220,7 @@ exports.titan_update_get = function (req, res, next) {
             return next(err);
         }
         // Success.
-        res.render('titan_form', { title: 'Update  Titan', company_list : results.company, titan:results.titan });
+        res.render('titan_form', { title: 'Update  Titan', company_list : results.company, titan:results.titan, users:results.users  });
     });
 
 };
@@ -225,6 +249,7 @@ exports.titan_update_post = [
             freelancer: req.body.freelancer,
             profile_status: req.body.profile_status,
             user: req.body.user,
+            publisher: req.user.username,
             _id: req.params.id
         }
     );

@@ -26,13 +26,13 @@ block content
   p #[strong Linkedin URL:]
     a(href=li_url, target='_blank')  #{titan.linkedin_url}
 
-  p #[strong Assigned To: ]
-    if titan.freelancer == 'Not Assigned'
-        span.text-danger #{titan.freelancer}
-    else if titan.freelancer == 'Steve Friedman'
-        span.text-success #{titan.freelancer}
-    else if titan.freelancer == 'Hector Echavarria'
-        span.text-info #{titan.freelancer}
+  p #[strong Assigned To: ] #{titan.user.username}
+    //if titan.freelancer == 'Not Assigned'
+    //    span.text-danger #{titan.freelancer}
+    //else if titan.freelancer == 'Steve Friedman'
+    //    span.text-success #{titan.freelancer}
+    //else if titan.freelancer == 'Hector Echavarria'
+    //    span.text-info #{titan.freelancer}
 
   p #[strong Profile Status: ]
     if titan.profile_status == 'In Progress'

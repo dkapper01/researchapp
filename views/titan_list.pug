@@ -2,17 +2,43 @@ extends layout
 
 block content
   //h5=title
+  form
   .table-responsive
     table.table.table-striped.table-hover.table-bordered.table-margin
       thead
         //tr
+        //th checkbox
         th #
         th Titan
         th Publisher
         th Created At
-        th Assigned To
         th Profile Status
-      tbody
+        th Asigned To
+        th
+            // Button trigger modal
+            button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#exampleModal')
+                | Send
+            // Modal
+            #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+                .modal-dialog(role='document')
+                    .modal-content
+                        .modal-header
+                            h5#exampleModalLabel.modal-title Pick A Freelancer
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                //span(aria-hidden='true') ×
+                        .modal-body
+                            select.form-control
+                                option dkapper01@gmail.com
+                                option dk@gmail.com
+                                option dak@gmail.com
+                                option dan@gmail.com
+                        .modal-footer
+                            button.btn.btn-success(type='button', data-dismiss='modal') Close
+                            button.btn.btn-primary(type='button') Send
+
+
+
+            tbody
         - var count = 0
         each titan in titan_lists
           tr
@@ -22,16 +48,23 @@ block content
             td #{titan.publisher}
             td #{titan.created_at_yyyy_mm_dd}
             td
-              if titan.freelancer == 'Not Assigned'
-                span.text-danger #{titan.freelancer}
-              else if titan.freelancer == 'Steve Friedman'
-                span.text-success #{titan.freelancer}
-              else if titan.freelancer == 'Hector Echavarria'
-                span.text-info #{titan.freelancer}
-            td
               if titan.profile_status == 'In Progress'
                 span.text-warning #{titan.profile_status}
               else if titan.profile_status == 'Invalid'
                 span.text-danger #{titan.profile_status}
               else if titan.profile_status == 'Complete'
                 span.text-success #{titan.profile_status}
+            td not working
+            td
+              input#defaultCheck1.form-check-input(type='checkbox', value='')
+              label.form-check-label(for='defaultCheck1')
+                //td #{titan.user.username}
+
+                //if titan.freelancer == 'Not Assigned'
+                //  span.text-danger #{titan.freelancer}
+                //else if titan.freelancer == 'Steve Friedman'
+                //  span.text-success #{titan.freelancer}
+                //else if titan.freelancer == 'Hector Echavarria'
+                //  span.text-info #{titan.freelancer}
+
+
