@@ -1,4 +1,4 @@
-The researchapp is at its core a data entry web application that can transfer important data between multiple people. My colleagues nickname this application the Kappernater after my last name Kapper. 
+The researchapp is at its core a data entry web application that can transfer data between multiple users. My colleagues nickname this application the Kappernater after my last name Kapper. 
 
 The problem: 
 
